@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Eligibility Checker | ScholarTrack</title>
+    <meta name="description" content="Check scholarship eligibility requirements and understand your scholarship matches with ScholarTrack.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --page-background: #739B8A;
+            --surface: #FFFFFF;
+            --surface-light: #F8FAF9;
+            --hero-background: #087F63;
+            --primary: #10DFA0;
+            --primary-hover: #066B53;
+            --text-primary: #17251F;
+            --text-secondary: #64756D;
+            --border: #DCE8E1;
+            --warning: #E9A23B;
+            --danger: #D9534F;
+
+            --bg: var(--page-background);
+            --text: #17251F;
+            --muted: #64756D;
+            --green: #087F63;
+            --green-bg: #E8F7F2;
+            --blue: #087F63;
+            --yellow: #E9A23B;
+            --red: #D9534F;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--text);
+            background: var(--bg);
+            font-family: "DM Sans", sans-serif;
+            padding: 24px 20px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+        }
+
+        .navbar {
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            color: var(--text);
+            font-family: "Manrope", sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -.05em;
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            margin-right: 9px;
+            border-radius: 11px;
+            background: var(--green);
+            color: #FFFFFF;
+        }
+        }
+
+        .brand-accent {
+            color: var(--green);
+        }
+
+        .nav-link {
+            padding: 9px 13px !important;
+            color: var(--muted);
+            font-size: .9rem;
+            font-weight: 600;
+            transition: color .2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--green);
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 9px 14px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .btn-outline-custom:hover {
+            color: var(--green);
+            border-color: var(--green);
+        }
+
+        .btn-green {
+            border: 0;
+            border-radius: 11px;
+            background: var(--primary);
+            color: #17251F;
+            padding: 12px 18px;
+            font-weight: 800;
+            box-shadow: 0 4px 14px rgba(16, 223, 160, 0.35);
+            transition: transform .2s ease, background .2s ease, color .2s ease;
+        }
+
+        .btn-green:hover {
+            background: var(--primary-hover);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .btn-green:disabled {
+            opacity: .55;
+            transform: none;
+        }
+
+        .btn-soft {
+            border: 1px solid rgba(155,230,176,.2);
+            border-radius: 10px;
+            background: var(--green-bg);
+            color: var(--green);
+            padding: 10px 14px;
+            font-weight: 700;
+        }
+
+        .btn-soft:hover {
+            background: rgba(155,230,176,.15);
+            color: var(--green);
+        }
+
+        .page-container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 35px 24px 70px;
+        }
+
+        .breadcrumb-line {
+            color: var(--muted);
+            font-size: .85rem;
+            margin-bottom: 27px;
+        }
+
+        .breadcrumb-line a {
+            color: var(--green);
+        }
+
+        .breadcrumb-line i {
+            margin: 0 9px;
+            font-size: .7rem;
+        }
+
+        .eyebrow {
+            color: var(--green);
+            text-transform: uppercase;
+            font-size: .75rem;
+            letter-spacing: .15em;
+            font-weight: 800;
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin: 13px 0;
+        }
+
+        .page-description {
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 650px;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            padding: 36px 40px;
+            margin-bottom: 27px;
+            border-radius: 20px;
+            background: var(--hero-background);
+            color: #FFFFFF;
+            box-shadow: 0 12px 30px rgba(8, 127, 99, 0.2);
+        }
+
+        .hero-banner h1 {
+            color: #FFFFFF;
+        }
+
+        .hero-banner p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 85px;
+            height: 85px;
+            flex-shrink: 0;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
+            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.15);
+            font-size: .77rem;
+            font-weight: 700;
+            margin-top: 14px;
+        }
+
+        .layout-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .card-panel {
+            padding: 27px;
+            border: 1px solid var(--border);
+            border-radius: 19px;
+            background: var(--surface);
+            margin-bottom: 23px;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            font-size: .86rem;
+            line-height: 1.7;
+            margin-bottom: 23px;
+        }
+
+        .form-label {
+            color: var(--text);
+            font-size: .86rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .form-control,
+        .form-select {
+            background-color: #F9FCFA;
+            border: 1.5px solid var(--border);
+            color: var(--text);
+            min-height: 47px;
+            border-radius: 10px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            background-color: #FFFFFF;
+            color: var(--text);
+            border-color: var(--hero-background);
+            box-shadow: 0 0 0 3px rgba(8, 127, 99, 0.12);
+        }
+
+        .form-control::placeholder {
+            color: #6f818a;
+        }
+
+        .form-select option {
+            background: #FFFFFF;
+            color: var(--text);
+        }
+
+        .form-text {
+            color: var(--muted);
+            font-size: .76rem;
+            line-height: 1.6;
+        }
+
+        .input-group-text {
+            background: #F8FAF9;
+            border-color: var(--border);
+            color: var(--muted);
+        }
+
+        .form-check-input {
+            background-color: #FFFFFF;
+            border-color: var(--border);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--hero-background);
+            border-color: var(--hero-background);
+        }
+
+        .form-check-label {
+            color: var(--text);
+            font-size: .87rem;
+        }
+
+        .privacy-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            padding: 14px;
+            border: 1px solid rgba(145,201,255,.15);
+            border-radius: 12px;
+            background: rgba(145,201,255,.045);
+            color: var(--muted);
+            font-size: .81rem;
+            line-height: 1.7;
+        }
+
+        .privacy-note i {
+            color: var(--blue);
+            font-size: 1.1rem;
+            margin-top: 2px;
+        }
+
+        .results-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .result-count {
+            padding: 6px 10px;
+            border-radius: 30px;
+            background: var(--green-bg);
+            color: var(--green);
+            font-size: .76rem;
+            font-weight: 800;
+        }
+
+        .empty-results {
+            text-align: center;
+            padding: 45px 20px;
+            border: 1px dashed var(--border);
+            border-radius: 15px;
+            color: var(--muted);
+            background: #F8FAF9;
+        }
+
+        .empty-results i {
+            color: var(--green);
+            font-size: 2.2rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .match-card {
+            padding: 21px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--surface);
+            transition: border-color .2s ease, transform .2s ease;
+        }
+
+        .match-card:hover {
+            border-color: rgba(155,230,176,.28);
+            transform: translateY(-2px);
+        }
+
+        .match-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .match-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 14px;
+        }
+
+        .match-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 43px;
+            height: 43px;
+            border-radius: 12px;
+            background: var(--green-bg);
+            color: var(--green);
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+
+        .match-title {
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.5;
+            margin-bottom: 5px;
+        }
+
+        .match-provider {
+            color: var(--muted);
+            font-size: .8rem;
+        }
+
+        .score-badge {
+            min-width: 73px;
+            padding: 9px;
+            border: 1px solid rgba(155,230,176,.2);
+            border-radius: 12px;
+            text-align: center;
+            background: rgba(155,230,176,.06);
+            color: var(--green);
+            flex-shrink: 0;
+        }
+
+        .score-badge strong {
+            display: block;
+            font-size: 1.15rem;
+        }
+
+        .score-badge span {
+            font-size: .66rem;
+            color: var(--muted);
+        }
+
+        .match-progress {
+            height: 6px;
+            background: #EAEFEA;
+            border-radius: 20px;
+            margin: 18px 0 13px;
+        }
+
+        .match-progress .progress-bar {
+            background: var(--green);
+            border-radius: 20px;
+        }
+
+        .match-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 13px 0;
+        }
+
+        .meta-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 6px 9px;
+            color: var(--muted);
+            background: #F8FAF9;
+            font-size: .75rem;
+        }
+
+        .meta-pill i {
+            color: var(--green);
+        }
+
+        .explanation-box {
+            border-radius: 12px;
+            padding: 13px;
+            background: #F8FAF9;
+            border: 1px solid var(--border);
+            margin: 13px 0;
+        }
+
+        .explanation-title {
+            font-size: .78rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .reason-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            color: var(--muted);
+            font-size: .79rem;
+            line-height: 1.6;
+            margin-top: 7px;
+        }
+
+        .reason-item i {
+            margin-top: 2px;
+        }
+
+        .reason-item.good i {
+            color: var(--green);
+        }
+
+        .reason-item.warning i {
+            color: var(--yellow);
+        }
+
+        .match-actions {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .match-actions .btn {
+            font-size: .8rem;
+        }
+
+        .disclaimer {
+            color: var(--muted);
+            font-size: .78rem;
+            line-height: 1.7;
+            margin-top: 18px;
+        }
+
+        .saved-summary {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            margin-bottom: 18px;
+            background: rgba(255,255,255,.025);
+        }
+
+        .saved-summary i {
+            font-size: 1.4rem;
+            color: var(--green);
+        }
+
+        .saved-summary strong {
+            display: block;
+            font-size: .9rem;
+        }
+
+        .saved-summary span {
+            display: block;
+            color: var(--muted);
+            font-size: .78rem;
+            margin-top: 3px;
+        }
+
+        .footer {
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            padding: 25px 0;
+            font-size: .82rem;
+        }
+
+        .toast-message {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 2000;
+            max-width: min(370px, calc(100vw - 44px));
+            padding: 15px 18px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: #FFFFFF;
+            color: var(--text);
+            box-shadow: 0 16px 40px rgba(23, 37, 31, 0.14);
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: opacity .2s ease, transform .2s ease;
+        }
+
+        .toast-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-up {
+            animation: fadeUp .5s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 991px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .page-container {
+                padding: 25px 15px 45px;
+            }
+
+            .hero {
+                padding: 24px 20px;
+                align-items: flex-start;
+            }
+
+            .hero-icon {
+                width: 58px;
+                height: 58px;
+                font-size: 1.7rem;
+                border-radius: 16px;
+            }
+
+            .card-panel {
+                padding: 21px 17px;
+            }
+
+            .match-card {
+                padding: 16px;
+            }
+
+            .score-badge {
+                min-width: 63px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid px-lg-5">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+                Scholar<span class="brand-accent">Track</span>
+            </a>
+
+            <button class="navbar-toggler btn-outline-custom" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#mainNavigation"
+                    aria-controls="mainNavigation" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto align-items-lg-center mt-3 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="scholarships.html">Scholarships</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="eligibility.html">Eligibility Checker</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="applications.html">Applications</a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn btn-outline-custom btn-sm" id="logoutButton">
+                            <i class="bi bi-box-arrow-right me-1"></i> Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-container">
+
+        <div class="breadcrumb-line">
+            <a href="dashboard.html">Dashboard</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Eligibility Checker</span>
+        </div>
+
+        <!-- Header -->
+        <section class="hero fade-up">
+            <div>
+                <div class="eyebrow">Explainable scholarship matching</div>
+                <h1 class="page-title">Find scholarships<br>that fit your journey.</h1>
+                <p class="page-description mb-0">
+                    Add your academic profile and compare it with scholarship requirements.
+                    Understand why an opportunity matches and what you may need to verify.
+                </p>
+
+                <div class="hero-badge">
+                    <i class="bi bi-lightbulb"></i>
+                    Transparent matching · Explainable results
+                </div>
+            </div>
+
+            <div class="hero-icon">
+                <i class="bi bi-clipboard2-check"></i>
+            </div>
+        </section>
+
+        <div class="layout-grid">
+
+            <!-- Profile form -->
+            <section>
+                <div class="card-panel fade-up">
+                    <h2 class="section-title">Your academic profile</h2>
+                    <p class="section-description">
+                        Enter information to compare your profile against the sample scholarship requirements.
+                        Fields are processed locally in this demo.
+                    </p>
+
+                    <form id="eligibilityForm">
+                        <div class="mb-4">
+                            <label class="form-label" for="education">
+                                Current education level
+                            </label>
+
+                            <select class="form-select" id="education" required>
+                                <option value="">Select your education level</option>
+                                <option value="school">School student</option>
+                                <option value="undergraduate">Undergraduate / B.Tech</option>
+                                <option value="postgraduate">Postgraduate</option>
+                                <option value="research">Research / PhD</option>
+                            </select>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <label class="form-label" for="marks">
+                                    Academic percentage
+                                </label>
+
+                                <div class="input-group">
+                                    <input class="form-control" type="number"
+                                           id="marks" min="0" max="100"
+                                           step="0.01" placeholder="e.g. 83.5" required>
+                                    <span class="input-group-text">%</span>
+                                </div>
+
+                                <div class="form-text">
+                                    Enter your latest eligible academic score.
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="form-label" for="annualIncome">
+                                    Annual family income
+                                </label>
+
+                                <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input class="form-control" type="number"
+                                           id="annualIncome" min="0"
+                                           placeholder="e.g. 180000" required>
+                                </div>
+
+                                <div class="form-text">
+                                    Enter a value only if you are comfortable doing so.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 mb-4">
+                            <label class="form-label" for="region">
+                                State / region
+                            </label>
+
+                            <select class="form-select" id="region" required>
+                                <option value="">Select your region</option>
+                                <option value="tamil-nadu">Tamil Nadu</option>
+                                <option value="other-india">Other Indian state / territory</option>
+                                <option value="other">Outside India / other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label" for="category">
+                                Preferred scholarship category
+                            </label>
+
+                            <select class="form-select" id="category">
+                                <option value="all">All categories</option>
+                                <option value="merit-based">Merit-based</option>
+                                <option value="need-based">Need-based</option>
+                                <option value="research">Research</option>
+                                <option value="special-category">Special category</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label" for="minimumMarks">
+                                Minimum academic score you want to target
+                            </label>
+
+                            <select class="form-select" id="minimumMarks">
+                                <option value="0">No minimum preference</option>
+                                <option value="50">50% or above</option>
+                                <option value="60">60% or above</option>
+                                <option value="70">70% or above</option>
+                                <option value="80">80% or above</option>
+                                <option value="90">90% or above</option>
+                            </select>
+
+                            <div class="form-text">
+                                This is a preference filter, not an official scholarship rule.
+                            </div>
+                        </div>
+
+                        <div class="privacy-note mb-4">
+                            <i class="bi bi-shield-lock"></i>
+                            <div>
+                                <strong>Privacy note</strong><br>
+                                This standalone demo evaluates your inputs in your browser.
+                                It does not save your academic or income profile to a server.
+                                The completed results are illustrative and are not an official eligibility decision.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-green w-100" id="findMatchesButton">
+                            <i class="bi bi-stars me-2"></i>
+                            Find my scholarship matches
+                        </button>
+                    </form>
+                </div>
+
+                <div class="card-panel">
+                    <h2 class="section-title">How matching works</h2>
+                    <p class="section-description mb-3">
+                        Each result explains which sample criteria match your profile.
+                    </p>
+
+                    <div class="d-flex align-items-start gap-3 mb-3">
+                        <div class="match-icon">
+                            <i class="bi bi-person-check"></i>
+                        </div>
+                        <div>
+                            <strong class="d-block mb-1">Profile comparison</strong>
+                            <span class="form-text">
+                                Compares your selected education level, score, region and category with available sample criteria.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start gap-3 mb-3">
+                        <div class="match-icon">
+                            <i class="bi bi-chat-square-text"></i>
+                        </div>
+                        <div>
+                            <strong class="d-block mb-1">Explainable results</strong>
+                            <span class="form-text">
+                                Shows matching and missing information instead of presenting a score without explanation.
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="match-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <div>
+                            <strong class="d-block mb-1">Verification before applying</strong>
+                            <span class="form-text">
+                                A good match score does not prove eligibility, authenticity or availability.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results -->
+            <section id="resultsSection">
+                <div class="results-header">
+                    <div>
+                        <div class="eyebrow mb-2">Personalized results</div>
+                        <h2 class="section-title mb-0">Scholarship matches</h2>
+                    </div>
+
+                    <span class="result-count" id="resultCount">Not started</span>
+                </div>
+
+                <div class="saved-summary">
+                    <i class="bi bi-bookmark-star"></i>
+                    <div>
+                        <strong id="savedCount">0 saved scholarships</strong>
+                        <span>Saved locally in this browser during the demo.</span>
+                    </div>
+                </div>
+
+                <div class="empty-results" id="emptyState">
+                    <i class="bi bi-search-heart"></i>
+                    <h3 class="h5 fw-bold" style="color: var(--text);">Your matches will appear here</h3>
+                    <p class="mb-0">
+                        Complete your profile and select Find my scholarship matches.
+                    </p>
+                </div>
+
+                <div id="resultsList" aria-live="polite"></div>
+
+                <p class="disclaimer" id="resultsDisclaimer" hidden>
+                    <i class="bi bi-info-circle me-1"></i>
+                    These are illustrative sample records and locally calculated match scores.
+                    They are not verified offers, official eligibility decisions, or predictions of award success.
+                    Confirm the requirements and application deadline with the actual provider.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container-fluid px-lg-5 d-flex flex-column flex-md-row justify-content-between gap-2">
+            <span>© <span id="currentYear"></span> ScholarTrack</span>
+            <span>Discover opportunities. Understand requirements. Apply with confidence.</span>
+        </div>
+    </footer>
+
+    <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        (() => {
+            "use strict";
+
+            const $ = selector => document.querySelector(selector);
+
+            const SAVED_KEY = "scholartrack_demo_saved";
+            const PROFILE_KEY = "scholartrack_eligibility_demo_profile";
+
+            /*
+             * DEMO ONLY:
+             * These fictional scholarship records are for frontend testing.
+             * Their criteria are illustrative and are not official provider rules.
+             *
+             * Future integration:
+             * GET /api/scholarships
+             * POST /api/eligibility/check
+             */
+
+            const scholarships = [
+                {
+                    id: "demo-sch-001",
+                    title: "National Merit Scholarship — Demo Record",
+                    provider: "Sample Government Scholarship Provider",
+                    amount: 25000,
+                    deadline: "2026-12-15",
+                    education: ["school", "undergraduate"],
+                    category: "merit-based",
+                    minimumMarks: 75,
+                    maximumIncome: null,
+                    regions: ["tamil-nadu", "other-india"],
+                    criteria: [
+                        "Education level: school or undergraduate",
+                        "Illustrative academic score: 75% or above",
+                        "Eligible region must be confirmed with the provider"
+                    ]
+                },
+                {
+                    id: "demo-sch-002",
+                    title: "Future Leaders Education Grant — Demo Record",
+                    provider: "Sample Education Foundation",
+                    amount: 40000,
+                    deadline: "2026-11-30",
+                    education: ["undergraduate", "postgraduate"],
+                    category: "merit-based",
+                    minimumMarks: 60,
+                    maximumIncome: null,
+                    regions: ["tamil-nadu", "other-india"],
+                    criteria: [
+                        "Education level: undergraduate or postgraduate",
+                        "Illustrative academic score: 60% or above",
+                        "Confirm institution and residency requirements"
+                    ]
+                },
+                {
+                    id: "demo-sch-003",
+                    title: "STEM Excellence Fellowship — Demo Record",
+                    provider: "Sample STEM Fellowship Council",
+                    amount: 60000,
+                    deadline: "2026-12-20",
+                    education: ["undergraduate", "postgraduate", "research"],
+                    category: "research",
+                    minimumMarks: 70,
+                    maximumIncome: null,
+                    regions: ["tamil-nadu", "other-india"],
+                    criteria: [
+                        "Education level: undergraduate, postgraduate or research",
+                        "Illustrative academic score: 70% or above",
+                        "STEM programme requirements need verification"
+                    ]
+                },
+                {
+                    id: "demo-sch-004",
+                    title: "Community Impact Student Grant — Demo Record",
+                    provider: "Sample Community Foundation",
+                    amount: 30000,
+                    deadline: "2026-11-15",
+                    education: ["school", "undergraduate"],
+                    category: "need-based",
+                    minimumMarks: 50,
+                    maximumIncome: 300000,
+                    regions: ["tamil-nadu", "other-india"],
+                    criteria: [
+                        "Education level: school or undergraduate",
+                        "Illustrative academic score: 50% or above",
+                        "Illustrative annual family income: ₹3,00,000 or below"
+                    ]
+                },
+                {
+                    id: "demo-sch-005",
+                    title: "Women in Technology Award — Demo Record",
+                    provider: "Sample Technology Foundation",
+                    amount: 50000,
+                    deadline: "2027-01-10",
+                    education: ["undergraduate", "postgraduate"],
+                    category: "special-category",
+                    minimumMarks: 65,
+                    maximumIncome: null,
+                    regions: ["tamil-nadu", "other-india"],
+                    criteria: [
+                        "Education level: undergraduate or postgraduate",
+                        "Illustrative academic score: 65% or above",
+                        "Actual special-category requirements must be verified"
+                    ]
+                },
+                {
+                    id: "demo-sch-006",
+                    title: "Rural Student Support Grant — Demo Record",
+                    provider: "Sample Rural Education Trust",
+                    amount: 20000,
+                    deadline: "2026-12-05",
+                    education: ["school", "undergraduate"],
+                    category: "need-based",
+                    minimumMarks: 50,
+                    maximumIncome: 250000,
+                    regions: ["tamil-nadu", "other-india"],
+                    criteria: [
+                        "Education level: school or undergraduate",
+                        "Illustrative academic score: 50% or above",
+                        "Illustrative annual family income: ₹2,50,000 or below"
+                    ]
+                },
+                {
+                    id: "demo-sch-007",
+                    title: "Emerging Innovators Fellowship — Demo Record",
+                    provider: "Sample Innovation Fellowship",
+                    amount: 75000,
+                    deadline: "2027-02-01",
+                    education: ["undergraduate", "postgraduate", "research"],
+                    category: "research",
+                    minimumMarks: 70,
+                    maximumIncome: null,
+                    regions: ["tamil-nadu", "other-india"],
+                    criteria: [
+                        "Education level: undergraduate, postgraduate or research",
+                        "Illustrative academic score: 70% or above",
+                        "Project or research criteria need verification"
+                    ]
+                },
+                {
+                    id: "demo-sch-008",
+                    title: "First-Generation Learner Award — Demo Record",
+                    provider: "Sample Learner Support Foundation",
+                    amount: 35000,
+                    deadline: "2026-12-28",
+                    education: ["undergraduate"],
+                    category: "special-category",
+                    minimumMarks: 60,
+                    maximumIncome: 350000,
+                    regions: ["tamil-nadu", "other-india"],
+                    criteria: [
+                        "Education level: undergraduate",
+                        "Illustrative academic score: 60% or above",
+                        "Illustrative income and category rules need verification"
+                    ]
+                },
+                {
+                    id: "demo-sch-009",
+                    title: "Academic Progress Scholarship — Demo Record",
+                    provider: "Sample Academic Support Council",
+                    amount: 15000,
+                    deadline: "",
+                    education: ["undergraduate"],
+                    category: "merit-based",
+                    minimumMarks: 55,
+                    maximumIncome: null,
+                    regions: ["tamil-nadu", "other-india"],
+                    criteria: [
+                        "Education level: undergraduate",
+                        "Illustrative academic score: 55% or above",
+                        "Application deadline is unknown in the demo record"
+                    ]
+                }
+            ];
+
+            let toastTimer = null;
+            let latestResults = [];
+
+            $("#currentYear").textContent = new Date().getFullYear();
+
+            function showToast(message) {
+                const toast = $("#toastMessage");
+                toast.textContent = message;
+                toast.classList.add("show");
+
+                clearTimeout(toastTimer);
+
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 3000);
+            }
+
+            function escapeHTML(value) {
+                return String(value ?? "").replace(/[&<>"']/g, character => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+                })[character]);
+            }
+
+            function readSavedIds() {
+                try {
+                    const data = JSON.parse(localStorage.getItem(SAVED_KEY) || "[]");
+                    return Array.isArray(data) ? data.map(String) : [];
+                } catch {
+                    return [];
+                }
+            }
+
+            function updateSavedCount() {
+                const count = readSavedIds().length;
+
+                $("#savedCount").textContent =
+                    `${count} saved scholarship${count === 1 ? "" : "s"}`;
+            }
+
+            function formatAmount(amount) {
+                return new Intl.NumberFormat("en-IN", {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 0
+                }).format(amount);
+            }
+
+            function formatDeadline(deadline) {
+                if (!deadline) {
+                    return "Deadline unknown";
+                }
+
+                const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(deadline);
+
+                if (!match) {
+                    return "Date unavailable";
+                }
+
+                const date = new Date(
+                    Number(match[1]),
+                    Number(match[2]) - 1,
+                    Number(match[3])
+                );
+
+                if (Number.isNaN(date.getTime())) {
+                    return "Date unavailable";
+                }
+
+                return date.toLocaleDateString("en-IN", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                });
+            }
+
+            function getProfile() {
+                return {
+                    education: $("#education").value,
+                    marks: Number($("#marks").value),
+                    annualIncome: Number($("#annualIncome").value),
+                    region: $("#region").value,
+                    category: $("#category").value,
+                    minimumMarks: Number($("#minimumMarks").value)
+                };
+            }
+
+            /*
+             * This score is a simple weighted demo heuristic.
+             * It is NOT a trained machine-learning model or an official eligibility decision.
+             */
+            function calculateMatch(scholarship, profile) {
+                let score = 0;
+                const maxScore = 100;
+                const matched = [];
+                const missing = [];
+
+                // Education level: 35 points.
+                if (scholarship.education.includes(profile.education)) {
+                    score += 35;
+                    matched.push("Your education level matches the sample criterion.");
+                } else {
+                    missing.push("Your education level does not match the sample criterion.");
+                }
+
+                // Academic score: 30 points.
+                if (profile.marks >= scholarship.minimumMarks) {
+                    score += 30;
+                    matched.push(
+                        `Your score meets the illustrative ${scholarship.minimumMarks}% academic threshold.`
+                    );
+                } else {
+                    missing.push(
+                        `The sample record uses a ${scholarship.minimumMarks}% threshold; your score is below it.`
+                    );
+                }
+
+                // Region: 15 points.
+                if (scholarship.regions.includes(profile.region)) {
+                    score += 15;
+                    matched.push("Your selected region matches the sample region list.");
+                } else {
+                    missing.push("Your selected region is not included in the sample region list.");
+                }
+
+                // Income: 15 points if the record has an income threshold.
+                if (scholarship.maximumIncome === null) {
+                    score += 15;
+                    matched.push("No income threshold is specified in this sample record.");
+                } else if (profile.annualIncome <= scholarship.maximumIncome) {
+                    score += 15;
+                    matched.push(
+                        `Your entered income is within the illustrative limit of ${formatAmount(scholarship.maximumIncome)}.`
+                    );
+                } else {
+                    missing.push(
+                        `The sample record uses an income limit of ${formatAmount(scholarship.maximumIncome)}.`
+                    );
+                }
+
+                // Category preference: 5 points.
+                if (
+                    profile.category === "all" ||
+                    profile.category === scholarship.category
+                ) {
+                    score += 5;
+                    matched.push("This record matches your category preference.");
+                } else {
+                    missing.push("This record differs from your selected category preference.");
+                }
+
+                const matchesTarget = score >= 70;
+                const meetsPreferredScore = profile.marks >= profile.minimumMarks;
+
+                return {
+                    ...scholarship,
+                    score: Math.min(maxScore, score),
+                    matched,
+                    missing,
+                    matchesTarget,
+                    meetsPreferredScore
+                };
+            }
+
+            function renderReason(items, type) {
+                if (!items.length) {
+                    return "";
+                }
+
+                const icon = type === "good"
+                    ? "bi-check-circle-fill"
+                    : "bi-exclamation-circle-fill";
+
+                return items.map(item => `
+                    <div class="reason-item ${type}">
+                        <i class="bi ${icon}"></i>
+                        <span>${escapeHTML(item)}</span>
+                    </div>
+                `).join("");
+            }
+
+            function renderMatchCard(item) {
+                const saved = readSavedIds().includes(String(item.id));
+
+                const scoreColor = item.score >= 70
+                    ? "var(--green)"
+                    : item.score >= 45
+                        ? "var(--yellow)"
+                        : "var(--red)";
+
+                const scoreLabel = item.score >= 70
+                    ? "Higher match"
+                    : item.score >= 45
+                        ? "Partial match"
+                        : "Lower match";
+
+                return `
+                    <article class="match-card fade-up">
+                        <div class="match-card-top">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="match-icon">
+                                    <i class="bi bi-mortarboard"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="match-title">${escapeHTML(item.title)}</h3>
+                                    <div class="match-provider">${escapeHTML(item.provider)}</div>
+                                </div>
+                            </div>
+
+                            <div class="score-badge" style="color:${scoreColor}">
+                                <strong>${item.score}%</strong>
+                                <span>${scoreLabel}</span>
+                            </div>
+                        </div>
+
+                        <div class="match-progress">
+                            <div class="progress-bar" style="width:${item.score}%; height:100%;"></div>
+                        </div>
+
+                        <div class="match-meta">
+                            <span class="meta-pill">
+                                <i class="bi bi-cash-stack"></i>
+                                ${escapeHTML(formatAmount(item.amount))}
+                            </span>
+
+                            <span class="meta-pill">
+                                <i class="bi bi-calendar-event"></i>
+                                ${escapeHTML(formatDeadline(item.deadline))}
+                            </span>
+
+                            <span class="meta-pill">
+                                <i class="bi bi-tag"></i>
+                                ${escapeHTML(item.category)}
+                            </span>
+                        </div>
+
+                        <div class="explanation-box">
+                            <div class="explanation-title">
+                                <i class="bi bi-lightbulb me-1"></i>
+                                Why this score?
+                            </div>
+
+                            ${renderReason(item.matched, "good")}
+                            ${renderReason(item.missing, "warning")}
+                        </div>
+
+                        <div class="match-actions">
+                            <a class="btn btn-green"
+                               href="scholarship-details.html?id=${encodeURIComponent(item.id)}">
+                                <i class="bi bi-arrow-up-right me-1"></i>
+                                View details
+                            </a>
+
+                            <button class="btn btn-outline-custom save-match-button"
+                                    data-id="${escapeHTML(item.id)}">
+                                <i class="bi ${saved ? "bi-bookmark-fill" : "bi-bookmark"} me-1"></i>
+                                ${saved ? "Saved" : "Save"}
+                            </button>
+                        </div>
+                    </article>
+                `;
+            }
+
+            function renderResults(results) {
+                latestResults = results;
+
+                $("#resultsList").innerHTML = "";
+                $("#emptyState").style.display = results.length ? "none" : "block";
+                $("#resultsDisclaimer").hidden = results.length === 0;
+                $("#resultCount").textContent =
+                    `${results.length} match${results.length === 1 ? "" : "es"}`;
+
+                if (!results.length) {
+                    $("#emptyState").innerHTML = `
+                        <i class="bi bi-search"></i>
+                        <h3 class="h5 fw-bold" style="color: var(--text);">No matching records</h3>
+                        <p class="mb-0">
+                            Try another category or review your selected preferences.
+                        </p>
+                    `;
+                    return;
+                }
+
+                results.forEach(item => {
+                    $("#resultsList").insertAdjacentHTML(
+                        "beforeend",
+                        renderMatchCard(item)
+                    );
+                });
+
+                updateSavedCount();
+            }
+
+            function saveProfileLocally(profile) {
+                /*
+                 * Only non-sensitive matching preferences are stored in this demo.
+                 * Income is deliberately excluded from local profile persistence.
+                 */
+                try {
+                    localStorage.setItem(PROFILE_KEY, JSON.stringify({
+                        education: profile.education,
+                        marks: profile.marks,
+                        region: profile.region,
+                        category: profile.category,
+                        minimumMarks: profile.minimumMarks
+                    }));
+                } catch {
+                    // Local persistence is optional.
+                }
+            }
+
+            function restoreProfile() {
+                try {
+                    const profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || "null");
+
+                    if (!profile || typeof profile !== "object") {
+                        return;
+                    }
+
+                    if (["school", "undergraduate", "postgraduate", "research"].includes(profile.education)) {
+                        $("#education").value = profile.education;
+                    }
+
+                    if (Number.isFinite(profile.marks)) {
+                        $("#marks").value = profile.marks;
+                    }
+
+                    if (["tamil-nadu", "other-india", "other"].includes(profile.region)) {
+                        $("#region").value = profile.region;
+                    }
+
+                    if (["all", "merit-based", "need-based", "research", "special-category"].includes(profile.category)) {
+                        $("#category").value = profile.category;
+                    }
+
+                    if ([0, 50, 60, 70, 80, 90].includes(profile.minimumMarks)) {
+                        $("#minimumMarks").value = String(profile.minimumMarks);
+                    }
+                } catch {
+                    // Ignore invalid demo profile data.
+                }
+            }
+
+            $("#eligibilityForm").addEventListener("submit", event => {
+                event.preventDefault();
+
+                const form = event.currentTarget;
+
+                if (!form.reportValidity()) {
+                    return;
+                }
+
+                const profile = getProfile();
+
+                if (
+                    !Number.isFinite(profile.marks) ||
+                    profile.marks < 0 ||
+                    profile.marks > 100
+                ) {
+                    showToast("Enter an academic percentage between 0 and 100.");
+                    return;
+                }
+
+                if (
+                    !Number.isFinite(profile.annualIncome) ||
+                    profile.annualIncome < 0
+                ) {
+                    showToast("Enter a valid non-negative annual income.");
+                    return;
+                }
+
+                saveProfileLocally(profile);
+
+                const results = scholarships
+                    .filter(item => {
+                        return profile.category === "all" ||
+                            item.category === profile.category;
+                    })
+                    .filter(item => {
+                        return profile.marks >= profile.minimumMarks;
+                    })
+                    .map(item => calculateMatch(item, profile))
+                    .sort((a, b) => b.score - a.score);
+
+                renderResults(results);
+
+                $("#resultsSection").scrollIntoView({
+                    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+                        ? "auto"
+                        : "smooth",
+                    block: "start"
+                });
+            });
+
+            $("#resultsList").addEventListener("click", event => {
+                const button = event.target.closest(".save-match-button");
+
+                if (!button) {
+                    return;
+                }
+
+                const id = button.dataset.id;
+                const saved = readSavedIds();
+                const index = saved.indexOf(id);
+
+                if (index >= 0) {
+                    saved.splice(index, 1);
+                    showToast("Removed from saved scholarships.");
+                } else {
+                    saved.push(id);
+                    showToast("Scholarship saved in this browser.");
+                }
+
+                try {
+                    localStorage.setItem(SAVED_KEY, JSON.stringify(saved));
+                } catch {
+                    showToast("Unable to save. Browser storage may be unavailable.");
+                }
+
+                updateSavedCount();
+
+                // Refresh bookmark labels without recalculating the scores.
+                const refreshed = latestResults.map(item => ({
+                    ...item,
+                    saved: readSavedIds().includes(String(item.id))
+                }));
+
+                renderResults(refreshed);
+            });
+
+            $("#logoutButton").addEventListener("click", async () => {
+                /*
+                 * Connect to Flask session logout when the backend is ready.
+                 */
+                try {
+                    await fetch("http://127.0.0.1:5000/api/auth/logout", {
+                        method: "POST",
+                        credentials: "include"
+                    });
+                } catch {
+                    // Backend may not be running during frontend development.
+                }
+
+                window.location.href = "login.html";
+            });
+
+            restoreProfile();
+            updateSavedCount();
+        })();
+    </script>
+</body>
+</html>

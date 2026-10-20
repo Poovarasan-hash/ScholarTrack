@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore Scholarships | ScholarTrack</title>
+
+    <meta
+        name="description"
+        content="Search, filter, and explore scholarship opportunities with ScholarTrack."
+    >
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* =============================================
+           SCHOLARTRACK SCHOLARSHIPS PAGE
+        ============================================= */
+
+        :root {
+            --page-background: #739B8A;
+            --surface: #FFFFFF;
+            --hero-background: #087F63;
+            --primary: #10DFA0;
+            --primary-hover: #066B53;
+            --text-primary: #17251F;
+            --text-secondary: #64756D;
+            --border: #DCE8E1;
+            --warning: #E9A23B;
+            --danger: #D9534F;
+
+            --sch-bg: var(--page-background);
+            --sch-card: #FFFFFF;
+            --sch-card-hover: #F8FAF9;
+            --sch-border: #DCE8E1;
+            --sch-text: #17251F;
+            --sch-muted: #64756D;
+            --sch-green: #087F63;
+            --sch-blue: #087F63;
+            --sch-yellow: #E9A23B;
+            --sch-red: #D9534F;
+        }
+
+        body.scholarships-page {
+            min-height: 100vh;
+            margin: 0;
+            background: var(--sch-bg);
+            color: var(--sch-text);
+            font-family: "DM Sans", sans-serif;
+            padding: 24px 20px;
+        }
+
+        @media (max-width: 768px) {
+            body.scholarships-page {
+                padding: 0;
+            }
+        }
+
+        .scholarships-page *,
+        .scholarships-page *::before,
+        .scholarships-page *::after {
+            box-sizing: border-box;
+        }
+
+        .scholarships-page a {
+            text-decoration: none;
+        }
+
+        .sch-shell {
+            max-width: 1380px;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 28px;
+            box-shadow: 0 20px 50px rgba(23, 37, 31, 0.14);
+            overflow: hidden;
+            border: 1px solid rgba(220, 232, 225, 0.8);
+            min-height: calc(100vh - 48px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+            .sch-shell {
+                border-radius: 0;
+                border: none;
+            }
+        }
+
+        /* NAVIGATION */
+
+        .sch-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--sch-border);
+            background: #FFFFFF;
+        }
+
+        .sch-nav-inner {
+            display: flex;
+            min-height: 74px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .sch-brand {
+            display: inline-flex;
+            flex-shrink: 0;
+            align-items: center;
+            gap: 10px;
+            color: var(--sch-text);
+            font-family: "Manrope", sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .sch-brand:hover {
+            color: var(--sch-text);
+        }
+
+        .sch-brand-icon {
+            display: grid;
+            width: 39px;
+            height: 39px;
+            place-items: center;
+            border-radius: 10px;
+            background: var(--hero-background);
+            color: #FFFFFF;
+            font-size: 1.15rem;
+        }
+
+        .sch-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .sch-nav-link {
+            padding: 9px 14px;
+            border-radius: 50px;
+            color: var(--sch-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .sch-nav-link:hover,
+        .sch-nav-link.active {
+            background: #E8F7F2;
+            color: var(--hero-background);
+        }
+
+        .sch-nav-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sch-avatar {
+            display: grid;
+            width: 38px;
+            height: 38px;
+            place-items: center;
+            border: 1px solid rgba(108, 231, 173, 0.2);
+            border-radius: 12px;
+            background: rgba(108, 231, 173, 0.1);
+            color: var(--sch-green);
+            font-weight: 800;
+        }
+
+        .sch-logout {
+            display: grid;
+            width: 39px;
+            height: 39px;
+            place-items: center;
+            border: 1px solid var(--sch-border);
+            border-radius: 11px;
+            background: #FFFFFF;
+            color: var(--sch-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sch-logout:hover {
+            border-color: var(--sch-green);
+            color: var(--sch-green);
+            background: #F8FAF9;
+        }
+
+        /* MAIN */
+
+        .sch-main {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 35px 0 65px;
+        }
+
+        .sch-page-heading {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 27px;
+        }
+
+        .sch-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 13px;
+            color: var(--sch-green);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .sch-page-heading h1 {
+            margin-bottom: 10px;
+            font-family: "Manrope", sans-serif;
+            font-size: clamp(1.9rem, 3.5vw, 2.65rem);
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+
+        .sch-page-heading p {
+            max-width: 650px;
+            margin: 0;
+            color: var(--sch-muted);
+            font-size: 0.93rem;
+            line-height: 1.8;
+        }
+
+        .sch-result-count {
+            flex-shrink: 0;
+            padding: 11px 14px;
+            border: 1px solid var(--sch-border);
+            border-radius: 11px;
+            background: var(--sch-card);
+            color: var(--sch-muted);
+            font-size: 0.82rem;
+        }
+
+        .sch-result-count strong {
+            color: var(--sch-green);
+        }
+
+        /* HERO */
+
+        .sch-hero {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 27px;
+            padding: 36px 40px;
+            border-radius: 20px;
+            background: var(--hero-background);
+            color: #FFFFFF;
+            box-shadow: 0 12px 30px rgba(8, 127, 99, 0.2);
+        }
+
+        .sch-hero h2 {
+            margin-bottom: 10px;
+            font-family: "Manrope", sans-serif;
+            font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            color: #FFFFFF;
+        }
+
+        .sch-hero h2 span {
+            color: var(--primary);
+        }
+
+        .sch-hero p {
+            max-width: 680px;
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.92rem;
+            line-height: 1.8;
+        }
+
+        /* SEARCH */
+
+        .sch-search-panel {
+            margin-bottom: 25px;
+            padding: 24px;
+            border: 1.5px solid var(--sch-border);
+            border-radius: 17px;
+            background: var(--sch-card);
+            box-shadow: 0 4px 14px rgba(23, 37, 31, 0.04);
+        }
+
+        .sch-search-box {
+            position: relative;
+        }
+
+        .sch-search-icon {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            color: var(--sch-muted);
+            font-size: 1.05rem;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .sch-search-input {
+            width: 100%;
+            min-height: 51px;
+            padding: 13px 45px;
+            border: 1.5px solid var(--sch-border);
+            border-radius: 12px;
+            outline: none;
+            background: #F9FCFA;
+            color: var(--sch-text);
+            font-size: 0.91rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .sch-search-input::placeholder {
+            color: #8A9D94;
+        }
+
+        .sch-search-input:focus {
+            background: #FFFFFF;
+            border-color: var(--hero-background);
+            box-shadow: 0 0 0 3px rgba(8, 127, 99, 0.12);
+        }
+
+        .sch-clear-search {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            display: grid;
+            width: 30px;
+            height: 30px;
+            place-items: center;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #91a2b8;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .sch-clear-search:hover {
+            color: var(--sch-green);
+        }
+
+        .sch-filter-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .sch-filter-select {
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 12px;
+            border: 1.5px solid var(--sch-border);
+            border-radius: 10px;
+            outline: none;
+            background: #FFFFFF;
+            color: var(--sch-text);
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .sch-filter-select:focus {
+            border-color: var(--hero-background);
+            box-shadow: 0 0 0 3px rgba(8, 127, 99, 0.12);
+        }
+
+        .sch-reset-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 14px;
+            border: 1px solid var(--sch-border);
+            border-radius: 10px;
+            background: #FFFFFF;
+            color: var(--sch-muted);
+            font-size: 0.82rem;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sch-reset-button:hover {
+            border-color: var(--sch-green);
+            color: var(--sch-green);
+            background: #F8FAF9;
+        }
+
+        /* TOOLBAR */
+
+        .sch-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .sch-toolbar h2 {
+            margin: 0;
+            font-family: "Manrope", sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .sch-sort {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--sch-muted);
+            font-size: 0.81rem;
+        }
+
+        .sch-sort select {
+            min-height: 39px;
+            padding: 8px 30px 8px 11px;
+            border: 1.5px solid var(--sch-border);
+            border-radius: 9px;
+            outline: none;
+            background: #FFFFFF;
+            color: var(--sch-text);
+            font-size: 0.82rem;
+        }
+
+        .sch-sort select:focus {
+            border-color: var(--hero-background);
+        }
+
+        /* SCHOLARSHIP CARDS */
+
+        .scholarship-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .scholarship-card {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            padding: 22px;
+            border: 1px solid var(--sch-border);
+            border-radius: 17px;
+            background: var(--sch-card);
+            box-shadow: 0 4px 16px rgba(23, 37, 31, 0.04);
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .scholarship-card:hover {
+            border-color: var(--sch-green);
+            box-shadow: 0 12px 30px rgba(8, 127, 99, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .sch-card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 19px;
+        }
+
+        .sch-card-icon {
+            display: grid;
+            width: 45px;
+            height: 45px;
+            flex-shrink: 0;
+            place-items: center;
+            border: 1px solid rgba(119, 185, 255, 0.16);
+            border-radius: 13px;
+            background: rgba(119, 185, 255, 0.08);
+            color: var(--sch-blue);
+            font-size: 1.25rem;
+        }
+
+        .sch-category-badge {
+            padding: 6px 9px;
+            border: 1px solid rgba(108, 231, 173, 0.15);
+            border-radius: 8px;
+            background: rgba(108, 231, 173, 0.07);
+            color: var(--sch-green);
+            font-size: 0.68rem;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .scholarship-card h3 {
+            margin-bottom: 8px;
+            color: var(--sch-text);
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.45;
+        }
+
+        .sch-provider {
+            margin-bottom: 16px;
+            color: var(--sch-muted);
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        .sch-amount {
+            margin-bottom: 16px;
+            color: var(--sch-green);
+            font-family: "Manrope", sans-serif;
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .sch-amount small {
+            color: var(--sch-muted);
+            font-family: "DM Sans", sans-serif;
+            font-size: 0.73rem;
+            font-weight: 500;
+        }
+
+        .sch-meta-list {
+            display: grid;
+            gap: 11px;
+            margin-bottom: 18px;
+        }
+
+        .sch-meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            color: var(--sch-muted);
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        .sch-meta-item i {
+            margin-top: 2px;
+            color: var(--sch-blue);
+        }
+
+        .sch-meta-item.deadline i {
+            color: var(--sch-yellow);
+        }
+
+        .sch-deadline-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            width: fit-content;
+            margin-bottom: 17px;
+            padding: 6px 9px;
+            border: 1px solid rgba(233, 162, 59, 0.25);
+            border-radius: 8px;
+            background: #FEF8ED;
+            color: #925805;
+            font-size: 0.73rem;
+            font-weight: 700;
+        }
+
+        .sch-deadline-badge.urgent {
+            border-color: rgba(217, 83, 79, 0.25);
+            background: #FDF2F2;
+            color: var(--sch-red);
+        }
+
+        .sch-deadline-badge.closed {
+            border-color: var(--sch-border);
+            background: #F8FAF9;
+            color: var(--sch-muted);
+        }
+
+        .sch-card-footer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid var(--sch-border);
+        }
+
+        .sch-view-button {
+            display: inline-flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 42px;
+            padding: 10px 12px;
+            border: 1px solid var(--sch-green);
+            border-radius: 10px;
+            background: #E8F7F2;
+            color: #066B53;
+            font-size: 0.82rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .sch-view-button:hover {
+            background: var(--sch-green);
+            color: #FFFFFF;
+        }
+
+        .sch-save-button {
+            display: grid;
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            place-items: center;
+            border: 1px solid var(--sch-border);
+            border-radius: 10px;
+            background: #FFFFFF;
+            color: var(--sch-muted);
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .sch-save-button:hover,
+        .sch-save-button.saved {
+            border-color: var(--sch-green);
+            background: #E8F7F2;
+            color: var(--sch-green);
+        }
+
+        /* SOURCE INFORMATION */
+
+        .sch-source-note {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 27px;
+            padding: 15px;
+            border: 1px solid var(--sch-border);
+            border-radius: 12px;
+            background: #F8FAF9;
+            color: var(--sch-muted);
+            font-size: 0.82rem;
+            line-height: 1.8;
+        }
+
+        .sch-source-note i {
+            margin-top: 3px;
+            color: var(--sch-blue);
+        }
+
+        /* EMPTY STATE */
+
+        .sch-empty-state {
+            grid-column: 1 / -1;
+            padding: 55px 20px;
+            border: 1px dashed var(--sch-border);
+            border-radius: 17px;
+            background: #F8FAF9;
+            text-align: center;
+        }
+
+        .sch-empty-state i {
+            display: block;
+            margin-bottom: 14px;
+            color: var(--sch-green);
+            font-size: 2.5rem;
+        }
+
+        .sch-empty-state h3 {
+            margin-bottom: 9px;
+            color: var(--sch-text);
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .sch-empty-state p {
+            margin: 0;
+            color: var(--sch-muted);
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+
+        .sch-footer {
+            padding: 22px 0;
+            border-top: 1px solid var(--sch-border);
+            color: var(--sch-muted);
+            font-size: 0.79rem;
+        }
+
+        .sch-footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .sch-footer a {
+            color: var(--sch-muted);
+            transition: color 0.2s ease;
+        }
+
+        .sch-footer a:hover {
+            color: var(--sch-green);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1199.98px) {
+            .sch-nav-inner {
+                flex-wrap: wrap;
+                padding-top: 12px;
+                padding-bottom: 12px;
+            }
+
+            .sch-nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .scholarship-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .sch-filter-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .sch-main {
+                padding-top: 25px;
+            }
+
+            .sch-page-heading {
+                flex-direction: column;
+            }
+
+            .sch-result-count {
+                align-self: flex-start;
+            }
+
+            .sch-nav-links {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 4px;
+            }
+
+            .sch-nav-link {
+                font-size: 0.78rem;
+            }
+
+            .sch-hero {
+                padding: 24px;
+            }
+
+            .sch-search-panel {
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .sch-brand {
+                font-size: 1.05rem;
+            }
+
+            .sch-brand-icon {
+                width: 35px;
+                height: 35px;
+            }
+
+            .scholarship-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sch-filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sch-toolbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .sch-toolbar h2 {
+                font-size: 1.05rem;
+            }
+
+            .sch-hero {
+                padding: 21px;
+            }
+
+            .sch-hero h2 {
+                font-size: 1.45rem;
+            }
+
+            .sch-page-heading h1 {
+                font-size: 1.9rem;
+            }
+
+            .sch-footer-inner {
+                align-items: center;
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .scholarships-page *,
+            .scholarships-page *::before,
+            .scholarships-page *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="scholarships-page">
+
+    <!-- ==========================================
+         TOP NAVIGATION
+    =========================================== -->
+
+    <header class="sch-nav">
+        <div class="container-fluid px-3 px-lg-4 px-xl-5">
+
+            <div class="sch-nav-inner">
+
+                <a href="dashboard.html" class="sch-brand">
+                    <span class="sch-brand-icon">
+                        <i class="bi bi-mortarboard-fill"></i>
+                    </span>
+
+                    <span>
+                        Scholar<span style="color:#6ce7ad;">Track</span>
+                    </span>
+                </a>
+
+                <nav class="sch-nav-links" aria-label="Main navigation">
+
+                    <a href="dashboard.html" class="sch-nav-link">
+                        <i class="bi bi-grid-1x2"></i>
+                        Dashboard
+                    </a>
+
+                    <a
+                        href="scholarships.html"
+                        class="sch-nav-link active"
+                        aria-current="page"
+                    >
+                        <i class="bi bi-search"></i>
+                        Scholarships
+                    </a>
+
+                    <a href="dashboard.html#deadlines" class="sch-nav-link">
+                        <i class="bi bi-calendar3"></i>
+                        Deadlines
+                    </a>
+
+                    <a href="applications.html" class="sch-nav-link">
+                        <i class="bi bi-folder2-open"></i>
+                        Applications
+                    </a>
+
+                    <a href="profile.html" class="sch-nav-link">
+                        <i class="bi bi-person"></i>
+                        Profile
+                    </a>
+
+                </nav>
+
+                <div class="sch-nav-user">
+
+                    <div class="sch-avatar" id="schUserAvatar">S</div>
+
+                    <button
+                        type="button"
+                        class="sch-logout"
+                        id="logoutButton"
+                        aria-label="Sign out"
+                        title="Sign out"
+                    >
+                        <i class="bi bi-box-arrow-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ==========================================
+         MAIN CONTENT
+    =========================================== -->
+
+    <main class="sch-main">
+        <div class="container-fluid px-3 px-lg-4 px-xl-5">
+
+            <!-- PAGE HEADING -->
+
+            <section class="sch-page-heading">
+
+                <div>
+                    <div class="sch-eyebrow">
+                        <i class="bi bi-stars"></i>
+                        DISCOVER OPPORTUNITIES
+                    </div>
+
+                    <h1>Explore Scholarships</h1>
+
+                    <p>
+                        Find funding opportunities, review eligibility
+                        requirements, and keep track of application deadlines.
+                    </p>
+                </div>
+
+                <div class="sch-result-count">
+                    <strong id="resultCount">0</strong>
+                    <span> opportunities found</span>
+                </div>
+
+            </section>
+
+
+            <!-- INTRO BANNER -->
+
+            <section class="sch-hero">
+
+                <h2>
+                    Find the right support for
+                    <span>your education.</span>
+                </h2>
+
+                <p>
+                    Search opportunities by keyword, education level,
+                    scholarship category, and deadline. Always verify
+                    eligibility and application details on the official
+                    scholarship provider's website.
+                </p>
+
+            </section>
+
+
+            <!-- SEARCH AND FILTERS -->
+
+            <section class="sch-search-panel">
+
+                <form id="searchForm">
+
+                    <div class="sch-search-box">
+
+                        <i class="bi bi-search sch-search-icon"></i>
+
+                        <input
+                            type="search"
+                            id="searchInput"
+                            class="sch-search-input"
+                            placeholder="Search scholarship name, provider, or keyword..."
+                            aria-label="Search scholarships"
+                            autocomplete="off"
+                        >
+
+                        <button
+                            type="button"
+                            id="clearSearch"
+                            class="sch-clear-search"
+                            aria-label="Clear search"
+                            title="Clear search"
+                        >
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="sch-filter-grid">
+
+                        <select
+                            id="educationFilter"
+                            class="sch-filter-select"
+                            aria-label="Filter by education level"
+                        >
+                            <option value="">All education levels</option>
+                            <option value="school">School</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="undergraduate">Undergraduate</option>
+                            <option value="postgraduate">Postgraduate</option>
+                            <option value="doctoral">Doctoral / PhD</option>
+                        </select>
+
+                        <select
+                            id="categoryFilter"
+                            class="sch-filter-select"
+                            aria-label="Filter by category"
+                        >
+                            <option value="">All categories</option>
+                            <option value="merit">Merit-based</option>
+                            <option value="need">Need-based</option>
+                            <option value="government">Government</option>
+                            <option value="private">Private</option>
+                            <option value="research">Research</option>
+                        </select>
+
+                        <select
+                            id="deadlineFilter"
+                            class="sch-filter-select"
+                            aria-label="Filter by deadline"
+                        >
+                            <option value="">All deadlines</option>
+                            <option value="7">Within 7 days</option>
+                            <option value="30">Within 30 days</option>
+                            <option value="open">Open opportunities</option>
+                        </select>
+
+                        <select
+                            id="savedFilter"
+                            class="sch-filter-select"
+                            aria-label="Filter saved scholarships"
+                        >
+                            <option value="all">All scholarships</option>
+                            <option value="saved">Saved only</option>
+                        </select>
+
+                        <button
+                            type="button"
+                            id="resetFilters"
+                            class="sch-reset-button"
+                        >
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                            Reset
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- RESULTS TOOLBAR -->
+
+            <section class="sch-toolbar">
+
+                <h2 id="resultsHeading">Available Opportunities</h2>
+
+                <div class="sch-sort">
+
+                    <label for="sortSelect">Sort by</label>
+
+                    <select id="sortSelect">
+                        <option value="deadline">Nearest deadline</option>
+                        <option value="name">Name A–Z</option>
+                        <option value="amount">Funding amount</option>
+                    </select>
+
+                </div>
+
+            </section>
+
+
+            <!-- SCHOLARSHIP RESULTS -->
+
+            <section
+                class="scholarship-grid"
+                id="scholarshipGrid"
+                aria-live="polite"
+                aria-busy="false"
+            >
+
+                <div class="sch-empty-state">
+                    <i class="bi bi-search"></i>
+
+                    <h3>Loading opportunities</h3>
+
+                    <p>
+                        Preparing scholarship listings...
+                    </p>
+                </div>
+
+            </section>
+
+
+            <!-- SOURCE DISCLAIMER -->
+
+            <aside class="sch-source-note">
+
+                <i class="bi bi-info-circle"></i>
+
+                <div>
+                    <strong>Important:</strong>
+                    The initial listings on this page are demonstration
+                    records, not verified live scholarship offers.
+                    Before applying, confirm the provider, eligibility,
+                    award amount, and deadline through the official source.
+                    Never pay an unverified intermediary to obtain a scholarship.
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="sch-footer">
+        <div class="container-fluid px-3 px-lg-4 px-xl-5">
+
+            <div class="sch-footer-inner">
+
+                <span>
+                    © <span id="currentYear"></span> ScholarTrack.
+                </span>
+
+                <div class="d-flex align-items-center gap-3">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="profile.html">Profile</a>
+                </div>
+
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- ==========================================
+         PAGE JAVASCRIPT
+    =========================================== -->
+
+    <script>
+    (() => {
+        "use strict";
+
+        /*
+         * DEMO MODE
+         *
+         * These entries are demonstration records only.
+         * They are not verified scholarship announcements.
+         *
+         * Replace this data with the Flask API response
+         * when the backend is ready.
+         */
+
+        const DEMO_SCHOLARSHIPS = [
+            {
+                id: "demo-sch-001",
+                title: "Merit-Based Education Scholarship",
+                provider: "Example Education Foundation",
+                amount: 25000,
+                category: "merit",
+                educationLevels: ["undergraduate", "postgraduate"],
+                deadline: "2026-10-25",
+                description: "Demonstration listing for merit-based education support.",
+                officialUrl: "",
+                sourceName: "Demo data — not a verified offer"
+            },
+            {
+                id: "demo-sch-002",
+                title: "Student Financial Support Grant",
+                provider: "Example Student Support Programme",
+                amount: 40000,
+                category: "need",
+                educationLevels: ["diploma", "undergraduate"],
+                deadline: "2026-11-05",
+                description: "Demonstration listing for education-related financial assistance.",
+                officialUrl: "",
+                sourceName: "Demo data — not a verified offer"
+            },
+            {
+                id: "demo-sch-003",
+                title: "Research and Innovation Fellowship",
+                provider: "Example Research Foundation",
+                amount: 60000,
+                category: "research",
+                educationLevels: ["postgraduate", "doctoral"],
+                deadline: "2026-11-15",
+                description: "Demonstration listing for eligible research students.",
+                officialUrl: "",
+                sourceName: "Demo data — not a verified offer"
+            },
+            {
+                id: "demo-sch-004",
+                title: "School Achievement Award",
+                provider: "Example Learning Initiative",
+                amount: 10000,
+                category: "merit",
+                educationLevels: ["school"],
+                deadline: "2026-10-22",
+                description: "Demonstration listing for school students.",
+                officialUrl: "",
+                sourceName: "Demo data — not a verified offer"
+            },
+            {
+                id: "demo-sch-005",
+                title: "Higher Education Access Grant",
+                provider: "Example Government Programme",
+                amount: 35000,
+                category: "government",
+                educationLevels: ["undergraduate", "postgraduate"],
+                deadline: "2026-11-25",
+                description: "Demonstration listing for higher education support.",
+                officialUrl: "",
+                sourceName: "Demo data — not a verified offer"
+            },
+            {
+                id: "demo-sch-006",
+                title: "Diploma Student Development Award",
+                provider: "Example Skills Foundation",
+                amount: 15000,
+                category: "private",
+                educationLevels: ["diploma"],
+                deadline: "2026-12-05",
+                description: "Demonstration listing for diploma students.",
+                officialUrl: "",
+                sourceName: "Demo data — not a verified offer"
+            },
+            {
+                id: "demo-sch-007",
+                title: "Doctoral Research Support Grant",
+                provider: "Example Academic Research Centre",
+                amount: 75000,
+                category: "research",
+                educationLevels: ["doctoral"],
+                deadline: "2026-12-15",
+                description: "Demonstration listing for doctoral research support.",
+                officialUrl: "",
+                sourceName: "Demo data — not a verified offer"
+            },
+            {
+                id: "demo-sch-008",
+                title: "Education Opportunity Award",
+                provider: "Example Learning Foundation",
+                amount: 20000,
+                category: "need",
+                educationLevels: ["school", "diploma", "undergraduate"],
+                deadline: "2026-11-10",
+                description: "Demonstration listing for eligible students.",
+                officialUrl: "",
+                sourceName: "Demo data — not a verified offer"
+            },
+            {
+                id: "demo-sch-009",
+                title: "Private University Achievement Grant",
+                provider: "Example University Foundation",
+                amount: 30000,
+                category: "private",
+                educationLevels: ["undergraduate", "postgraduate"],
+                deadline: "2026-12-20",
+                description: "Demonstration listing for university students.",
+                officialUrl: "",
+                sourceName: "Demo data — not a verified offer"
+            }
+        ];
+
+
+        // =================================================
+        // ELEMENTS
+        // =================================================
+
+        const searchInput = document.getElementById("searchInput");
+        const clearSearch = document.getElementById("clearSearch");
+
+        const educationFilter = document.getElementById("educationFilter");
+        const categoryFilter = document.getElementById("categoryFilter");
+        const deadlineFilter = document.getElementById("deadlineFilter");
+        const savedFilter = document.getElementById("savedFilter");
+
+        const sortSelect = document.getElementById("sortSelect");
+        const resetFilters = document.getElementById("resetFilters");
+
+        const scholarshipGrid = document.getElementById("scholarshipGrid");
+
+        const resultCount = document.getElementById("resultCount");
+        const resultsHeading = document.getElementById("resultsHeading");
+
+
+        // =================================================
+        // SAVED SCHOLARSHIPS
+        // =================================================
+
+        /*
+         * localStorage is used only for non-sensitive demo
+         * bookmark IDs. Real saved scholarships should be
+         * associated with the authenticated user in MySQL.
+         */
+
+        const SAVED_KEY = "scholartrack_demo_saved";
+
+        function getSavedIds() {
+            try {
+                const value = JSON.parse(
+                    localStorage.getItem(SAVED_KEY) || "[]"
+                );
+
+                return Array.isArray(value)
+                    ? value.filter(id => typeof id === "string")
+                    : [];
+
+            } catch {
+                return [];
+            }
+        }
+
+        function saveSavedIds(ids) {
+            try {
+                localStorage.setItem(
+                    SAVED_KEY,
+                    JSON.stringify(ids)
+                );
+
+                return true;
+
+            } catch {
+                return false;
+            }
+        }
+
+
+        // =================================================
+        // HELPERS
+        // =================================================
+
+        function createElement(tag, className, text) {
+            const element = document.createElement(tag);
+
+            if (className) {
+                element.className = className;
+            }
+
+            if (text !== undefined && text !== null) {
+                element.textContent = String(text);
+            }
+
+            return element;
+        }
+
+
+        function createIcon(className) {
+            const icon = document.createElement("i");
+
+            icon.className = className;
+            icon.setAttribute("aria-hidden", "true");
+
+            return icon;
+        }
+
+
+        function normalize(value) {
+            return String(value || "")
+                .trim()
+                .toLowerCase();
+        }
+
+
+        function formatAmount(amount) {
+            if (
+                typeof amount !== "number" ||
+                !Number.isFinite(amount) ||
+                amount < 0
+            ) {
+                return "See official details";
+            }
+
+            return new Intl.NumberFormat("en-IN", {
+                style: "currency",
+                currency: "INR",
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+
+        function formatDate(dateString) {
+            if (!dateString) {
+                return "Deadline not confirmed";
+            }
+
+            const date = new Date(dateString + "T12:00:00");
+
+            if (Number.isNaN(date.getTime())) {
+                return "Deadline not confirmed";
+            }
+
+            return new Intl.DateTimeFormat("en-IN", {
+                day: "numeric",
+                month: "short",
+                year: "numeric"
+            }).format(date);
+        }
+
+
+        function daysRemaining(dateString) {
+            if (!dateString) {
+                return null;
+            }
+
+            const now = new Date();
+
+            const today = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                now.getDate()
+            );
+
+            const deadline = new Date(dateString + "T00:00:00");
+
+            if (Number.isNaN(deadline.getTime())) {
+                return null;
+            }
+
+            return Math.ceil(
+                (deadline.getTime() - today.getTime()) /
+                (1000 * 60 * 60 * 24)
+            );
+        }
+
+
+        function getCategoryLabel(category) {
+            const labels = {
+                merit: "Merit-based",
+                need: "Need-based",
+                government: "Government",
+                private: "Private",
+                research: "Research"
+            };
+
+            return labels[category] || "Other";
+        }
+
+
+        function getEducationLabel(levels) {
+            const labels = {
+                school: "School",
+                diploma: "Diploma",
+                undergraduate: "Undergraduate",
+                postgraduate: "Postgraduate",
+                doctoral: "Doctoral / PhD"
+            };
+
+            if (!Array.isArray(levels) || levels.length === 0) {
+                return "Eligibility not confirmed";
+            }
+
+            return levels.map(level => labels[level] || level).join(", ");
+        }
+
+
+        // =================================================
+        // FILTERING
+        // =================================================
+
+        function filterScholarships() {
+            const query = normalize(searchInput.value);
+
+            const education = educationFilter.value;
+            const category = categoryFilter.value;
+            const deadline = deadlineFilter.value;
+            const savedOnly = savedFilter.value === "saved";
+
+            const savedIds = getSavedIds();
+
+            return DEMO_SCHOLARSHIPS.filter(item => {
+                const searchableText = normalize([
+                    item.title,
+                    item.provider,
+                    item.description,
+                    getCategoryLabel(item.category)
+                ].join(" "));
+
+                if (query && !searchableText.includes(query)) {
+                    return false;
+                }
+
+                if (
+                    education &&
+                    !item.educationLevels.includes(education)
+                ) {
+                    return false;
+                }
+
+                if (category && item.category !== category) {
+                    return false;
+                }
+
+                if (savedOnly && !savedIds.includes(item.id)) {
+                    return false;
+                }
+
+                const remaining = daysRemaining(item.deadline);
+
+                if (deadline === "7") {
+                    if (
+                        remaining === null ||
+                        remaining < 0 ||
+                        remaining > 7
+                    ) {
+                        return false;
+                    }
+                }
+
+                if (deadline === "30") {
+                    if (
+                        remaining === null ||
+                        remaining < 0 ||
+                        remaining > 30
+                    ) {
+                        return false;
+                    }
+                }
+
+                if (deadline === "open") {
+                    if (remaining === null || remaining < 0) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
+        }
+
+
+        // =================================================
+        // SORTING
+        // =================================================
+
+        function sortScholarships(items) {
+            const sorted = [...items];
+
+            switch (sortSelect.value) {
+                case "name":
+                    sorted.sort((a, b) =>
+                        a.title.localeCompare(b.title)
+                    );
+                    break;
+
+                case "amount":
+                    sorted.sort((a, b) =>
+                        (Number(b.amount) || 0) -
+                        (Number(a.amount) || 0)
+                    );
+                    break;
+
+                case "deadline":
+                default:
+                    sorted.sort((a, b) => {
+                        const dateA = a.deadline
+                            ? new Date(a.deadline).getTime()
+                            : Infinity;
+
+                        const dateB = b.deadline
+                            ? new Date(b.deadline).getTime()
+                            : Infinity;
+
+                        return dateA - dateB;
+                    });
+            }
+
+            return sorted;
+        }
+
+
+        // =================================================
+        // CARD RENDERING
+        // =================================================
+
+        function createScholarshipCard(item) {
+            const card = createElement(
+                "article",
+                "scholarship-card"
+            );
+
+            const top = createElement(
+                "div",
+                "sch-card-top"
+            );
+
+            const iconBox = createElement(
+                "div",
+                "sch-card-icon"
+            );
+
+            iconBox.appendChild(
+                createIcon("bi bi-mortarboard")
+            );
+
+            top.appendChild(iconBox);
+
+            top.appendChild(
+                createElement(
+                    "span",
+                    "sch-category-badge",
+                    getCategoryLabel(item.category)
+                )
+            );
+
+            card.appendChild(top);
+
+            card.appendChild(
+                createElement("h3", "", item.title)
+            );
+
+            card.appendChild(
+                createElement(
+                    "p",
+                    "sch-provider",
+                    item.provider || "Provider details unavailable"
+                )
+            );
+
+            const amount = createElement(
+                "div",
+                "sch-amount"
+            );
+
+            amount.textContent = formatAmount(item.amount);
+
+            card.appendChild(amount);
+
+            const metaList = createElement(
+                "div",
+                "sch-meta-list"
+            );
+
+            const educationItem = createElement(
+                "div",
+                "sch-meta-item"
+            );
+
+            educationItem.appendChild(
+                createIcon("bi bi-mortarboard")
+            );
+
+            educationItem.appendChild(
+                document.createTextNode(
+                    getEducationLabel(item.educationLevels)
+                )
+            );
+
+            metaList.appendChild(educationItem);
+
+            const deadlineItem = createElement(
+                "div",
+                "sch-meta-item deadline"
+            );
+
+            deadlineItem.appendChild(
+                createIcon("bi bi-calendar-event")
+            );
+
+            deadlineItem.appendChild(
+                document.createTextNode(
+                    "Deadline: " + formatDate(item.deadline)
+                )
+            );
+
+            metaList.appendChild(deadlineItem);
+
+            card.appendChild(metaList);
+
+            const remaining = daysRemaining(item.deadline);
+
+            let deadlineText = "Deadline not confirmed";
+            let badgeClass = "sch-deadline-badge";
+
+            if (remaining === null) {
+                deadlineText = "Deadline not confirmed";
+                badgeClass += " closed";
+
+            } else if (remaining < 0) {
+                deadlineText = "Deadline passed";
+                badgeClass += " closed";
+
+            } else if (remaining === 0) {
+                deadlineText = "Due today";
+                badgeClass += " urgent";
+
+            } else if (remaining <= 7) {
+                deadlineText =
+                    remaining + (remaining === 1 ? " day remaining" : " days remaining");
+
+                badgeClass += " urgent";
+
+            } else {
+                deadlineText = remaining + " days remaining";
+            }
+
+            const badge = createElement(
+                "div",
+                badgeClass
+            );
+
+            badge.appendChild(
+                createIcon("bi bi-clock")
+            );
+
+            badge.appendChild(
+                document.createTextNode(deadlineText)
+            );
+
+            card.appendChild(badge);
+
+            const footer = createElement(
+                "div",
+                "sch-card-footer"
+            );
+
+            const viewButton = createElement(
+                "a",
+                "sch-view-button",
+                "View details"
+            );
+
+            /*
+             * This page expects a scholarship details page.
+             * The details page will be created later.
+             */
+            viewButton.href =
+                "scholarship-details.html?id=" +
+                encodeURIComponent(item.id);
+
+            viewButton.appendChild(
+                createIcon("bi bi-arrow-up-right")
+            );
+
+            footer.appendChild(viewButton);
+
+            const saveButton = createElement(
+                "button",
+                "sch-save-button"
+            );
+
+            saveButton.type = "button";
+
+            const savedIds = getSavedIds();
+            const isSaved = savedIds.includes(item.id);
+
+            saveButton.classList.toggle("saved", isSaved);
+
+            saveButton.setAttribute(
+                "aria-label",
+                isSaved
+                    ? "Remove saved scholarship"
+                    : "Save scholarship"
+            );
+
+            saveButton.title = isSaved
+                ? "Remove saved scholarship"
+                : "Save scholarship";
+
+            saveButton.appendChild(
+                createIcon(
+                    isSaved
+                        ? "bi bi-bookmark-fill"
+                        : "bi bi-bookmark"
+                )
+            );
+
+            saveButton.addEventListener("click", () => {
+                const currentIds = getSavedIds();
+
+                const alreadySaved = currentIds.includes(item.id);
+
+                const updatedIds = alreadySaved
+                    ? currentIds.filter(id => id !== item.id)
+                    : [...currentIds, item.id];
+
+                if (!saveSavedIds(updatedIds)) {
+                    window.alert(
+                        "Unable to save this item in the browser. Check your browser storage settings."
+                    );
+
+                    return;
+                }
+
+                renderScholarships();
+            });
+
+            footer.appendChild(saveButton);
+
+            card.appendChild(footer);
+
+            return card;
+        }
+
+
+        // =================================================
+        // EMPTY STATE
+        // =================================================
+
+        function renderEmptyState() {
+            scholarshipGrid.replaceChildren();
+
+            const state = createElement(
+                "div",
+                "sch-empty-state"
+            );
+
+            state.appendChild(
+                createIcon("bi bi-search")
+            );
+
+            state.appendChild(
+                createElement(
+                    "h3",
+                    "",
+                    "No scholarships found"
+                )
+            );
+
+            state.appendChild(
+                createElement(
+                    "p",
+                    "",
+                    "Try changing your search term or filters to discover more opportunities."
+                )
+            );
+
+            scholarshipGrid.appendChild(state);
+        }
+
+
+        // =================================================
+        // MAIN RENDER
+        // =================================================
+
+        function renderScholarships() {
+            scholarshipGrid.setAttribute("aria-busy", "true");
+
+            const filtered = filterScholarships();
+            const sorted = sortScholarships(filtered);
+
+            resultCount.textContent = sorted.length;
+
+            resultsHeading.textContent =
+                sorted.length === 1
+                    ? "1 Opportunity"
+                    : "Available Opportunities";
+
+            scholarshipGrid.replaceChildren();
+
+            if (sorted.length === 0) {
+                renderEmptyState();
+
+                scholarshipGrid.setAttribute("aria-busy", "false");
+
+                return;
+            }
+
+            sorted.forEach(item => {
+                scholarshipGrid.appendChild(
+                    createScholarshipCard(item)
+                );
+            });
+
+            scholarshipGrid.setAttribute("aria-busy", "false");
+        }
+
+
+        // =================================================
+        // RESET FILTERS
+        // =================================================
+
+        function resetAllFilters() {
+            searchInput.value = "";
+            educationFilter.value = "";
+            categoryFilter.value = "";
+            deadlineFilter.value = "";
+            savedFilter.value = "all";
+            sortSelect.value = "deadline";
+
+            renderScholarships();
+        }
+
+
+        // =================================================
+        // EVENT LISTENERS
+        // =================================================
+
+        searchInput.addEventListener(
+            "input",
+            renderScholarships
+        );
+
+        educationFilter.addEventListener(
+            "change",
+            renderScholarships
+        );
+
+        categoryFilter.addEventListener(
+            "change",
+            renderScholarships
+        );
+
+        deadlineFilter.addEventListener(
+            "change",
+            renderScholarships
+        );
+
+        savedFilter.addEventListener(
+            "change",
+            renderScholarships
+        );
+
+        sortSelect.addEventListener(
+            "change",
+            renderScholarships
+        );
+
+        clearSearch.addEventListener("click", () => {
+            searchInput.value = "";
+            searchInput.focus();
+
+            renderScholarships();
+        });
+
+        resetFilters.addEventListener(
+            "click",
+            resetAllFilters
+        );
+
+
+        // =================================================
+        // LOGOUT
+        // =================================================
+
+        document.getElementById("logoutButton").addEventListener(
+            "click",
+            async () => {
+                const confirmed = window.confirm(
+                    "Are you sure you want to sign out?"
+                );
+
+                if (!confirmed) return;
+
+                try {
+                    const response = await fetch(
+                        "http://127.0.0.1:5000/api/auth/logout",
+                        {
+                            method: "POST",
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        }
+                    );
+
+                    if (!response.ok) {
+                        window.alert(
+                            "The server could not confirm logout. Please try again."
+                        );
+
+                        return;
+                    }
+
+                    window.location.assign("login.html");
+
+                } catch (error) {
+                    console.error("Logout request failed:", error);
+
+                    window.alert(
+                        "The Flask backend is not connected yet. Secure logout is unavailable."
+                    );
+                }
+            }
+        );
+
+
+        // =================================================
+        // INITIALIZE
+        // =================================================
+
+        const yearElement = document.getElementById("currentYear");
+
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+
+        /*
+         * Real backend integration will replace DEMO_SCHOLARSHIPS
+         * with data from GET /api/scholarships.
+         *
+         * Expected record fields:
+         * id, title, provider, amount, category,
+         * educationLevels, deadline, description,
+         * officialUrl, sourceName.
+         */
+
+        renderScholarships();
+
+    })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="ScholarTrack centralises verified scholarship deadlines, transparent eligibility guidelines, and structured application tracking for students."
+    >
+
+    <meta name="theme-color" content="#739B8A">
+
+    <title>ScholarTrack — Scholarship & Fellowship Deadline Tracker</title>
+
+    <!-- Google Fonts: Manrope & DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap 5 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Project Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Outer Sage-Green Page Background wraps the White Rounded Site Container -->
+    <div class="site-frame">
+
+        <!-- =========================
+             WHITE NAVIGATION BAR
+        ========================== -->
+        <header class="site-header" id="siteHeader">
+            <div class="container-fluid px-lg-5">
+                <nav class="navbar navbar-expand-lg navbar-light py-0">
+
+                    <!-- Logo -->
+                    <a class="brand" href="index.html">
+                        <span class="brand-icon">
+                            <i class="bi bi-mortarboard-fill"></i>
+                        </span>
+                        <span>Scholar<span class="brand-highlight">Track</span></span>
+                    </a>
+
+                    <!-- Mobile Toggler -->
+                    <button
+                        class="navbar-toggler border-0"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavigation"
+                        aria-controls="mainNavigation"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Navigation Items -->
+                    <div class="collapse navbar-collapse" id="mainNavigation">
+                        <ul class="navbar-nav mx-auto nav-links mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="scholarships.html">Explore Scholarships</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="eligibility.html">Eligibility</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#how-it-works">How It Works</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#about">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+
+                        <div class="nav-actions">
+                            <a href="login.html" class="btn btn-nav-login">
+                                Log In
+                            </a>
+                            <a href="signup.html" class="btn btn-nav-signup">
+                                Sign Up
+                                <i class="bi bi-arrow-right-short fs-5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </nav>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- =========================
+                 EMERALD GREEN HERO SECTION
+            ========================== -->
+            <section class="hero-wrapper" id="home">
+                <div class="hero-emerald-card">
+                    <div class="row align-items-center g-5">
+
+                        <!-- Left Hero Content -->
+                        <div class="col-lg-7">
+                            <div class="hero-pill-badge">
+                                <i class="bi bi-bell-fill"></i>
+                                <span>Verified Deadlines & Criteria</span>
+                            </div>
+
+                            <h1>
+                                Stay ahead of deadlines.
+                                <span class="d-block highlight-green">Find your funding on time.</span>
+                            </h1>
+
+                            <p class="hero-lead">
+                                ScholarTrack centralises authentic scholarship announcements from official sources,
+                                explains eligibility requirements clearly, and helps you track every stage of your applications.
+                            </p>
+
+                            <div class="hero-cta-group">
+                                <a href="scholarships.html" class="btn btn-hero-primary">
+                                    Explore Scholarships
+                                    <i class="bi bi-arrow-up-right"></i>
+                                </a>
+                                <a href="signup.html" class="btn btn-hero-secondary">
+                                    Get Started Free
+                                </a>
+                            </div>
+
+                            <div class="hero-trust-bar">
+                                <i class="bi bi-shield-check"></i>
+                                <span>Transparent official links • No sponsored bias • Structured deadline alerts</span>
+                            </div>
+                        </div>
+
+                        <!-- Right Hero Visual Card -->
+                        <div class="col-lg-5">
+                            <div class="hero-preview-card">
+                                <div class="hero-preview-header">
+                                    <div>
+                                        <h6 class="mb-0 fw-bold text-dark">Upcoming Deadlines</h6>
+                                        <small class="text-muted">Live Tracking Preview</small>
+                                    </div>
+                                    <span class="hero-preview-badge">Active</span>
+                                </div>
+
+                                <div class="hero-preview-item">
+                                    <div>
+                                        <strong>National Merit Fellowship</strong>
+                                        <span>Higher Education Dept. • Merit</span>
+                                    </div>
+                                    <span class="days-left-badge">5 Days Left</span>
+                                </div>
+
+                                <div class="hero-preview-item">
+                                    <div>
+                                        <strong>STEM Postgraduate Grant</strong>
+                                        <span>Science & Tech Research Board</span>
+                                    </div>
+                                    <span class="days-left-badge">12 Days Left</span>
+                                </div>
+
+                                <div class="hero-preview-item mb-0">
+                                    <div>
+                                        <strong>Global Higher Studies Award</strong>
+                                        <span>Academic Exchange Foundation</span>
+                                    </div>
+                                    <span class="days-left-badge">24 Days Left</span>
+                                </div>
+
+                                <div class="mt-3 pt-3 border-top d-flex justify-content-between align-items-center">
+                                    <span class="small text-secondary">
+                                        <i class="bi bi-check-circle-fill text-success me-1"></i> Match calculation enabled
+                                    </span>
+                                    <a href="scholarships.html" class="small fw-bold text-decoration-none" style="color: var(--hero-background);">
+                                        View All <i class="bi bi-chevron-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- =========================
+                 FEATURE CARDS (WHITE SURFACE)
+            ========================== -->
+            <section class="content-section" id="features">
+                <div class="container-fluid px-lg-4">
+                    <div class="text-center mb-5">
+                        <span class="section-eyebrow">Platform Capabilities</span>
+                        <h2 class="section-title">Designed for student clarity</h2>
+                        <p class="section-subtitle mx-auto">
+                            Scholarship hunting is often overwhelming with scattered portals and conflicting guidelines.
+                            ScholarTrack brings structure and transparency to your search.
+                        </p>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-4">
+                            <article class="feature-card">
+                                <div class="feature-icon-wrapper">
+                                    <i class="bi bi-search"></i>
+                                </div>
+                                <h3>Curated Opportunities</h3>
+                                <p>
+                                    Discover scholarships categorized by degree, academic stream, state, and category from verified government and educational portals.
+                                </p>
+                            </article>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <article class="feature-card">
+                                <div class="feature-icon-wrapper">
+                                    <i class="bi bi-sliders"></i>
+                                </div>
+                                <h3>Illustrative Eligibility</h3>
+                                <p>
+                                    Compare published criteria against your academic marks and background to quickly understand whether an opportunity aligns with your profile.
+                                </p>
+                            </article>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <article class="feature-card">
+                                <div class="feature-icon-wrapper">
+                                    <i class="bi bi-calendar-event"></i>
+                                </div>
+                                <h3>Deadline Intelligence</h3>
+                                <p>
+                                    Monitor closing dates in one dashboard. Filter by urgent deadlines so you never miss an application window.
+                                </p>
+                            </article>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <article class="feature-card">
+                                <div class="feature-icon-wrapper">
+                                    <i class="bi bi-link-45deg"></i>
+                                </div>
+                                <h3>Direct Official Links</h3>
+                                <p>
+                                    Every single listing links directly to the verified provider's portal so you always apply at the authentic official source.
+                                </p>
+                            </article>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <article class="feature-card">
+                                <div class="feature-icon-wrapper">
+                                    <i class="bi bi-kanban"></i>
+                                </div>
+                                <h3>Application Pipeline</h3>
+                                <p>
+                                    Track whether your applications are interested, preparing, submitted, or approved with custom notes and application reference numbers.
+                                </p>
+                            </article>
+                        </div>
+
+                        <div class="col-md-6 col-lg-4">
+                            <article class="feature-card">
+                                <div class="feature-icon-wrapper">
+                                    <i class="bi bi-shield-lock"></i>
+                                </div>
+                                <h3>Secure Student Privacy</h3>
+                                <p>
+                                    Your personal information and academic records remain private and are only used for your profile matching and dashboard organization.
+                                </p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =========================
+                 HOW IT WORKS SECTION
+            ========================== -->
+            <section class="content-section bg-light border-top border-bottom" id="how-it-works">
+                <div class="container-fluid px-lg-4">
+                    <div class="text-center mb-5">
+                        <span class="section-eyebrow">Structured Process</span>
+                        <h2 class="section-title">How ScholarTrack Works</h2>
+                        <p class="section-subtitle mx-auto">
+                            A straightforward, four-step approach to keep your funding search organized from discovery to submission.
+                        </p>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6 col-lg-3">
+                            <div class="how-card">
+                                <span class="how-number">1</span>
+                                <h3>Build Profile</h3>
+                                <p>Add your course, year, state, and academic percentage to establish your base profile.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3">
+                            <div class="how-card">
+                                <span class="how-number">2</span>
+                                <h3>Explore & Filter</h3>
+                                <p>Filter through open scholarships based on criteria, deadline proximity, and study level.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3">
+                            <div class="how-card">
+                                <span class="how-number">3</span>
+                                <h3>Verify Criteria</h3>
+                                <p>Review required documents, income ceilings, and verify official announcement URLs.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-3">
+                            <div class="how-card">
+                                <span class="how-number">4</span>
+                                <h3>Track Submission</h3>
+                                <p>Log submission dates, save your reference IDs, and monitor your deadlines in your dashboard.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- =========================
+                 TRANSPARENCY & DATA ETHICS STRIP
+            ========================== -->
+            <section class="transparency-banner" id="about">
+                <h3>
+                    <i class="bi bi-info-circle-fill"></i>
+                    Scholarship Source & Data Transparency
+                </h3>
+                <p>
+                    ScholarTrack is an informational tracking tool. All scholarship data originates from public portals of government departments, educational institutions, and accredited trusts. We do not issue scholarships, charge application commissions, or claim official affiliation. Compatibility matching scores are illustrative calculations designed to assist your discovery and do not represent formal eligibility decisions. Always verify final instructions on the official provider website.
+                </p>
+            </section>
+
+        </main>
+
+        <!-- =========================
+             USEFUL FOOTER
+        ========================== -->
+        <footer class="site-footer">
+            <div class="container-fluid px-lg-4">
+                <div class="row g-4">
+
+                    <!-- Col 1: Brand & Summary -->
+                    <div class="col-lg-4 footer-col">
+                        <a class="brand mb-3 d-inline-flex" href="index.html">
+                            <span class="brand-icon">
+                                <i class="bi bi-mortarboard-fill"></i>
+                            </span>
+                            <span>Scholar<span class="brand-highlight">Track</span></span>
+                        </a>
+                        <p class="text-secondary small pe-lg-4">
+                            Scholarship and fellowship deadline tracker helping students stay organized and focused on their educational future.
+                        </p>
+                    </div>
+
+                    <!-- Col 2: Navigation Links -->
+                    <div class="col-6 col-lg-2 footer-col">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="scholarships.html">Scholarships</a></li>
+                            <li><a href="eligibility.html">Eligibility</a></li>
+                            <li><a href="#how-it-works">How It Works</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 3: Student Tools -->
+                    <div class="col-6 col-lg-2 footer-col">
+                        <h4>Student Tools</h4>
+                        <ul>
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a href="applications.html">My Applications</a></li>
+                            <li><a href="profile.html">Profile Settings</a></li>
+                            <li><a href="contact.html">Support & Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 4: Account -->
+                    <div class="col-6 col-lg-2 footer-col">
+                        <h4>Account</h4>
+                        <ul>
+                            <li><a href="login.html">Log In</a></li>
+                            <li><a href="signup.html">Create Account</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Col 5: Ethics & Trust -->
+                    <div class="col-6 col-lg-2 footer-col">
+                        <h4>Integrity</h4>
+                        <ul>
+                            <li><a href="#about">Source Policy</a></li>
+                            <li><a href="contact.html">Report Link</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="footer-bottom">
+                    <span>&copy; 2026 ScholarTrack. All rights reserved.</span>
+                    <span>Direct Provider Verification • Academic Independence</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Bootstrap 5 Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

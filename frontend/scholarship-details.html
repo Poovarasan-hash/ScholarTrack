@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Scholarship Details | ScholarTrack</title>
+    <meta name="description" content="Review scholarship eligibility, deadlines, required documents and source information with ScholarTrack.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --page-background: #739B8A;
+            --surface: #FFFFFF;
+            --surface-light: #F8FAF9;
+            --hero-background: #087F63;
+            --primary: #10DFA0;
+            --primary-hover: #066B53;
+            --text-primary: #17251F;
+            --text-secondary: #64756D;
+            --border: #DCE8E1;
+            --warning: #E9A23B;
+            --danger: #D9534F;
+
+            --bg: var(--page-background);
+            --text: #17251F;
+            --muted: #64756D;
+            --green: #087F63;
+            --green-dark: #E8F7F2;
+            --blue: #087F63;
+            --yellow: #E9A23B;
+            --red: #D9534F;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "DM Sans", sans-serif;
+            min-height: 100vh;
+            padding: 24px 20px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+        }
+
+        .navbar {
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            color: var(--text);
+            font-family: "Manrope", sans-serif;
+            font-weight: 800;
+            letter-spacing: -.05em;
+            font-size: 1.4rem;
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            margin-right: 9px;
+            border-radius: 11px;
+            background: var(--green);
+            color: #FFFFFF;
+        }
+
+        .brand-accent {
+            color: var(--green);
+        }
+
+        .nav-link {
+            color: var(--muted);
+            font-size: .9rem;
+            font-weight: 600;
+            padding: 9px 13px !important;
+            transition: color .2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--green);
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            padding: 9px 14px;
+            font-weight: 600;
+        }
+
+        .btn-outline-custom:hover {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .btn-green {
+            border: 0;
+            border-radius: 11px;
+            background: var(--primary);
+            color: #17251F;
+            padding: 12px 17px;
+            font-weight: 800;
+            box-shadow: 0 4px 14px rgba(16, 223, 160, 0.35);
+            transition: transform .2s ease, background .2s ease, color .2s ease;
+        }
+
+        .btn-green:hover {
+            background: var(--primary-hover);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .btn-green:disabled {
+            background: #DCE8E1;
+            color: #8A9D94;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-soft {
+            background: rgba(155, 230, 176, .09);
+            border: 1px solid rgba(155, 230, 176, .19);
+            color: var(--green);
+            border-radius: 11px;
+            padding: 11px 15px;
+            font-weight: 700;
+        }
+
+        .btn-soft:hover {
+            background: rgba(155, 230, 176, .16);
+            color: var(--green);
+        }
+
+        .page-container {
+            max-width: 1250px;
+            margin: auto;
+            padding: 35px 24px 70px;
+        }
+
+        .breadcrumb-line {
+            color: var(--muted);
+            font-size: .85rem;
+            margin-bottom: 25px;
+        }
+
+        .breadcrumb-line a {
+            color: var(--green);
+        }
+
+        .breadcrumb-line i {
+            margin: 0 9px;
+            font-size: .7rem;
+        }
+
+        .eyebrow {
+            color: var(--green);
+            font-size: .75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: .14em;
+        }
+
+        .hero-card {
+            position: relative;
+            overflow: hidden;
+            padding: 36px;
+            border: 1px solid var(--border);
+            border-radius: 25px;
+            background: var(--hero-background);
+            color: #FFFFFF;
+            margin-bottom: 25px;
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            right: -100px;
+            bottom: -135px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .scholarship-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 62px;
+            height: 62px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #FFFFFF;
+            font-size: 1.8rem;
+            margin-bottom: 22px;
+        }
+
+        .scholarship-title {
+            max-width: 800px;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            color: #FFFFFF;
+            margin: 12px 0;
+        }
+
+        .provider {
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 1rem;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 11px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.12);
+            color: #FFFFFF;
+            font-size: .76rem;
+            font-weight: 700;
+            margin: 5px 5px 0 0;
+        }
+
+        .pill.green {
+            color: #17251F;
+            border-color: var(--primary);
+            background: var(--primary);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .metric-card {
+            height: 100%;
+            padding: 22px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            transition: border-color .2s ease, transform .2s ease;
+        }
+
+        .metric-card:hover {
+            border-color: rgba(155, 230, 176, .3);
+            transform: translateY(-3px);
+        }
+
+        .metric-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 39px;
+            height: 39px;
+            border-radius: 12px;
+            background: rgba(155, 230, 176, .09);
+            color: var(--green);
+            margin-bottom: 17px;
+            font-size: 1.15rem;
+        }
+
+        .metric-label {
+            color: var(--muted);
+            font-size: .8rem;
+            margin-bottom: 7px;
+        }
+
+        .metric-value {
+            font-size: 1.35rem;
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .content-card {
+            padding: 27px;
+            border: 1px solid var(--border);
+            border-radius: 19px;
+            background: var(--surface);
+            margin-bottom: 22px;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .section-subtitle {
+            color: var(--muted);
+            font-size: .87rem;
+            margin-bottom: 23px;
+            line-height: 1.65;
+        }
+
+        .body-copy {
+            color: var(--text);
+            line-height: 1.85;
+            font-size: .94rem;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .detail-row:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .detail-row i {
+            color: var(--green);
+            font-size: 1.05rem;
+            margin-top: 2px;
+        }
+
+        .detail-row strong {
+            display: block;
+            font-size: .9rem;
+            margin-bottom: 4px;
+        }
+
+        .detail-row span {
+            display: block;
+            color: var(--muted);
+            font-size: .85rem;
+            line-height: 1.65;
+        }
+
+        .check-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--text);
+            font-size: .9rem;
+            line-height: 1.65;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .check-list li:last-child {
+            border-bottom: 0;
+        }
+
+        .check-list i {
+            color: var(--green);
+            margin-top: 3px;
+        }
+
+        .deadline-panel {
+            border: 1px solid rgba(233, 162, 59, 0.25);
+            border-radius: 15px;
+            background: #FEF8ED;
+            padding: 20px;
+        }
+
+        .deadline-panel .big-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #925805;
+        }
+
+        .deadline-panel .small-label {
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .progress {
+            height: 7px;
+            border-radius: 20px;
+            background: #EAEFEA;
+        }
+
+        .progress-bar {
+            border-radius: 20px;
+            background: var(--green);
+        }
+
+        .trust-box {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            border: 1px solid rgba(8, 127, 99, 0.18);
+            background: #F8FAF9;
+            border-radius: 14px;
+            padding: 17px;
+        }
+
+        .trust-box > i {
+            color: var(--blue);
+            font-size: 1.35rem;
+        }
+
+        .trust-box p {
+            margin: 7px 0 0;
+            color: var(--muted);
+            font-size: .84rem;
+            line-height: 1.7;
+        }
+
+        .source-box {
+            background: #F8FAF9;
+            border: 1px solid var(--border);
+            padding: 17px;
+            border-radius: 13px;
+        }
+
+        .source-status {
+            color: var(--yellow);
+            font-size: .78rem;
+            font-weight: 800;
+        }
+
+        .alert-note {
+            color: #925805;
+            font-size: .82rem;
+            line-height: 1.7;
+            background: #FEF8ED;
+            border: 1px solid rgba(233, 162, 59, 0.25);
+            border-radius: 12px;
+            padding: 13px 15px;
+        }
+
+        .form-check-input {
+            background-color: #FFFFFF;
+            border-color: var(--border);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--hero-background);
+            border-color: var(--hero-background);
+        }
+
+        .form-check-label {
+            color: var(--text);
+            font-size: .9rem;
+        }
+
+        .result-box {
+            display: none;
+            padding: 17px;
+            border: 1px solid #BFE8D9;
+            border-radius: 13px;
+            background: #E8F7F2;
+            color: #066B53;
+            font-size: .9rem;
+            line-height: 1.7;
+            margin-top: 17px;
+        }
+
+        .result-box.show {
+            display: block;
+        }
+
+        .footer {
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            padding: 25px 0;
+            font-size: .82rem;
+        }
+
+        .loading-state {
+            text-align: center;
+            color: var(--muted);
+            padding: 70px 20px;
+        }
+
+        .loading-state i {
+            font-size: 2rem;
+            color: var(--green);
+        }
+
+        .toast-message {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 2000;
+            max-width: min(370px, calc(100vw - 44px));
+            padding: 15px 18px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: #FFFFFF;
+            color: var(--text);
+            box-shadow: 0 16px 40px rgba(23, 37, 31, 0.14);
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: opacity .2s ease, transform .2s ease;
+        }
+
+        .toast-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal {
+            animation: fadeUp .55s ease both;
+        }
+
+        .reveal.delay-1 {
+            animation-delay: .08s;
+        }
+
+        .reveal.delay-2 {
+            animation-delay: .16s;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .page-container {
+                padding: 25px 15px 45px;
+            }
+
+            .hero-card {
+                padding: 25px 20px;
+                border-radius: 19px;
+            }
+
+            .content-card {
+                padding: 21px 18px;
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .metric-value {
+                font-size: 1.15rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid px-lg-5">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <span class="brand-mark"><i class="bi bi-mortarboard-fill"></i></span>
+                Scholar<span class="brand-accent">Track</span>
+            </a>
+
+            <button class="navbar-toggler btn-outline-custom" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#mainNavigation"
+                    aria-controls="mainNavigation" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto align-items-lg-center mt-3 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="scholarships.html">Scholarships</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="applications.html">Applications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">My Profile</a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn btn-outline-custom btn-sm" id="logoutButton">
+                            <i class="bi bi-box-arrow-right me-1"></i> Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-container">
+        <div class="breadcrumb-line">
+            <a href="dashboard.html">Dashboard</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="scholarships.html">Scholarships</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>Details</span>
+        </div>
+
+        <div id="loadingState" class="loading-state">
+            <i class="bi bi-arrow-repeat d-block mb-3"></i>
+            Loading scholarship details...
+        </div>
+
+        <div id="detailsContent" style="display:none;">
+            <!-- Scholarship Header -->
+            <section class="hero-card reveal">
+                <div class="scholarship-icon">
+                    <i class="bi bi-mortarboard"></i>
+                </div>
+
+                <div class="eyebrow" id="scholarshipCategory">Scholarship opportunity</div>
+
+                <h1 class="scholarship-title" id="scholarshipTitle">
+                    Scholarship title
+                </h1>
+
+                <p class="provider mb-3" id="scholarshipProvider">
+                    Provider information
+                </p>
+
+                <div id="scholarshipBadges"></div>
+
+                <div class="hero-actions">
+                    <button class="btn btn-green" id="applyButton" disabled>
+                        <i class="bi bi-box-arrow-up-right me-2"></i>
+                        Official application unavailable
+                    </button>
+
+                    <button class="btn btn-soft" id="saveButton">
+                        <i class="bi bi-bookmark me-2"></i>
+                        Save scholarship
+                    </button>
+
+                    <button class="btn btn-outline-custom" id="shareButton">
+                        <i class="bi bi-share me-2"></i>
+                        Share
+                    </button>
+                </div>
+
+                <div class="alert-note mt-4 mb-0">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Demo information:</strong> Scholarship records displayed in this version are illustrative sample data, not verified live offers. Confirm all details with the official provider before applying.
+                </div>
+            </section>
+
+            <!-- Summary Metrics -->
+            <section class="row g-3 mb-4 reveal delay-1">
+                <div class="col-6 col-lg-3">
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="bi bi-cash-stack"></i></div>
+                        <div class="metric-label">Award amount</div>
+                        <div class="metric-value" id="awardAmount">Not specified</div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="bi bi-calendar-event"></i></div>
+                        <div class="metric-label">Application deadline</div>
+                        <div class="metric-value" id="deadlineDate">Not specified</div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="bi bi-mortarboard"></i></div>
+                        <div class="metric-label">Education level</div>
+                        <div class="metric-value" id="educationLevel">Not specified</div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3">
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="bi bi-clock-history"></i></div>
+                        <div class="metric-label">Deadline status</div>
+                        <div class="metric-value" id="deadlineStatus">Unknown</div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="row g-4">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <section class="content-card reveal">
+                        <h2 class="section-title">About this opportunity</h2>
+                        <p class="section-subtitle">
+                            Understand the opportunity before deciding whether to apply.
+                        </p>
+                        <p class="body-copy" id="scholarshipDescription"></p>
+
+                        <div class="detail-row">
+                            <i class="bi bi-people"></i>
+                            <div>
+                                <strong>Intended applicants</strong>
+                                <span id="targetApplicants"></span>
+                            </div>
+                        </div>
+
+                        <div class="detail-row">
+                            <i class="bi bi-geo-alt"></i>
+                            <div>
+                                <strong>Eligible region</strong>
+                                <span id="eligibleRegion"></span>
+                            </div>
+                        </div>
+
+                        <div class="detail-row">
+                            <i class="bi bi-calendar-check"></i>
+                            <div>
+                                <strong>Application period</strong>
+                                <span id="applicationPeriod"></span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Eligibility -->
+                    <section class="content-card reveal delay-1">
+                        <h2 class="section-title">Eligibility requirements</h2>
+                        <p class="section-subtitle">
+                            Review each requirement carefully. This demo checker is only a basic self-assessment.
+                        </p>
+
+                        <ul class="check-list" id="eligibilityList"></ul>
+
+                        <hr style="border-color:var(--border); margin:25px 0;">
+
+                        <h3 class="section-title mb-3">Quick eligibility self-check</h3>
+
+                        <div id="eligibilityQuestions">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input eligibility-check" type="checkbox" id="checkEducation">
+                                <label class="form-check-label" for="checkEducation">
+                                    My education level matches the stated requirement.
+                                </label>
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input eligibility-check" type="checkbox" id="checkRegion">
+                                <label class="form-check-label" for="checkRegion">
+                                    I meet the stated location or residency requirement.
+                                </label>
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input eligibility-check" type="checkbox" id="checkIncome">
+                                <label class="form-check-label" for="checkIncome">
+                                    I meet any applicable income or financial requirements.
+                                </label>
+                            </div>
+
+                            <div class="form-check mb-3">
+                                <input class="form-check-input eligibility-check" type="checkbox" id="checkDocuments">
+                                <label class="form-check-label" for="checkDocuments">
+                                    I can provide the required documents.
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-green mt-2" id="checkEligibilityButton">
+                            <i class="bi bi-check2-circle me-2"></i>
+                            Check my readiness
+                        </button>
+
+                        <div class="result-box" id="eligibilityResult" role="status" aria-live="polite"></div>
+                    </section>
+
+                    <!-- Documents -->
+                    <section class="content-card reveal delay-2">
+                        <h2 class="section-title">Required documents</h2>
+                        <p class="section-subtitle">
+                            Prepare the documents listed by the provider. Actual requirements may differ.
+                        </p>
+
+                        <ul class="check-list" id="documentsList"></ul>
+                    </section>
+                </div>
+
+                <!-- Sidebar Content -->
+                <div class="col-lg-4">
+                    <section class="content-card reveal">
+                        <h2 class="section-title">Deadline countdown</h2>
+                        <p class="section-subtitle">
+                            Based on the date stored in this record.
+                        </p>
+
+                        <div class="deadline-panel">
+                            <div class="small-label mb-2">Time remaining</div>
+                            <div class="big-number" id="countdownNumber">--</div>
+                            <div class="small-label mt-2" id="countdownMessage">
+                                Deadline information unavailable.
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="small text-secondary">Urgency indicator</span>
+                                <span class="small" id="urgencyLabel">Unknown</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" id="urgencyBar" style="width:0%"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-card reveal delay-1">
+                        <h2 class="section-title">Authenticity & trust</h2>
+                        <p class="section-subtitle">
+                            Check the source before sharing personal information.
+                        </p>
+
+                        <div class="trust-box">
+                            <i class="bi bi-shield-check"></i>
+                            <div>
+                                <strong id="trustHeading">Verification pending</strong>
+                                <p id="trustDescription">
+                                    No verified official source is available in this demo record.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="small text-secondary">Source verification</span>
+                                <span class="small" id="trustStatus">Not verified</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" id="trustBar" style="width:0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="alert-note mt-3">
+                            A trust indicator is not proof that an offer is genuine. Never pay an application fee or share sensitive information without independently verifying the provider.
+                        </div>
+                    </section>
+
+                    <section class="content-card reveal delay-2">
+                        <h2 class="section-title">Source information</h2>
+                        <p class="section-subtitle">
+                            Find where the record came from.
+                        </p>
+
+                        <div class="source-box">
+                            <div class="source-status mb-2">
+                                <i class="bi bi-exclamation-circle me-1"></i>
+                                DEMO SOURCE STATUS
+                            </div>
+
+                            <strong id="sourceName">Source not verified</strong>
+
+                            <p class="body-copy mt-2 mb-2" id="sourceDescription">
+                                No verified source attribution is available for this sample record.
+                            </p>
+
+                            <a href="#" id="sourceLink" class="btn btn-soft btn-sm mt-2" hidden>
+                                <i class="bi bi-box-arrow-up-right me-1"></i>
+                                Visit source
+                            </a>
+                        </div>
+
+                        <div class="detail-row mt-3">
+                            <i class="bi bi-arrow-repeat"></i>
+                            <div>
+                                <strong>Last checked</strong>
+                                <span id="lastChecked">Not available</span>
+                            </div>
+                        </div>
+
+                        <div class="detail-row">
+                            <i class="bi bi-fingerprint"></i>
+                            <div>
+                                <strong>Record ID</strong>
+                                <span id="recordId">Not available</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content-card">
+                        <h2 class="section-title">Application readiness</h2>
+                        <p class="section-subtitle">
+                            Track how many preparation steps you have completed.
+                        </p>
+
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="small text-secondary">Preparation checklist</span>
+                            <span class="small" id="readinessPercent">0%</span>
+                        </div>
+
+                        <div class="progress mb-4">
+                            <div class="progress-bar" id="readinessBar" style="width:0%"></div>
+                        </div>
+
+                        <ul class="check-list">
+                            <li>
+                                <i class="bi bi-circle"></i>
+                                <span>Review the official eligibility rules.</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-circle"></i>
+                                <span>Collect the required documents.</span>
+                            </li>
+                            <li>
+                                <i class="bi bi-circle"></i>
+                                <span>Confirm the deadline and submission method.</span>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div id="notFoundState" class="content-card text-center py-5" style="display:none;">
+            <i class="bi bi-search" style="font-size:2.7rem;color:var(--green);"></i>
+            <h2 class="mt-3">Scholarship not found</h2>
+            <p class="text-secondary mt-2">
+                This record may not exist in the demo dataset, or its identifier may be invalid.
+            </p>
+            <a href="scholarships.html" class="btn btn-green mt-3">
+                <i class="bi bi-arrow-left me-2"></i>
+                Back to scholarships
+            </a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container-fluid px-lg-5 d-flex flex-column flex-md-row justify-content-between gap-2">
+            <span>© <span id="currentYear"></span> ScholarTrack</span>
+            <span>Explore opportunities. Verify sources. Apply with confidence.</span>
+        </div>
+    </footer>
+
+    <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        (() => {
+            "use strict";
+
+            const $ = (selector) => document.querySelector(selector);
+
+            const DEMO_SAVED_KEY = "scholartrack_demo_saved";
+
+            /*
+             * DEMO DATA ONLY:
+             * These records are illustrative and are not verified scholarship offers.
+             * Keep officialUrl empty until a real, reviewed provider URL is supplied.
+             *
+             * When the Flask backend is ready, replace this fallback with:
+             * GET http://127.0.0.1:5000/api/scholarships/<id>
+             */
+
+            const demoScholarships = [
+                {
+                    id: "demo-sch-001",
+                    title: "National Merit Scholarship — Demo Record",
+                    provider: "Sample Government Scholarship Provider",
+                    category: "Merit-based",
+                    amount: 25000,
+                    deadline: "2026-12-15",
+                    educationLevel: "Undergraduate",
+                    region: "India — confirm the actual eligible region",
+                    target: "Students meeting the provider's academic and other eligibility conditions.",
+                    description: "This illustrative record demonstrates how ScholarTrack can present a merit-based scholarship. It is not an official scheme announcement. Check the relevant provider's official website for eligibility, award amount, application dates and submission instructions.",
+                    eligibility: [
+                        "Meet the education-level requirements specified by the actual provider.",
+                        "Meet the minimum academic performance criteria, if applicable.",
+                        "Satisfy any residency, nationality or institution requirements.",
+                        "Provide valid supporting documents requested by the provider."
+                    ],
+                    documents: [
+                        "Government-approved identity proof, if required.",
+                        "Current academic marksheets or transcripts.",
+                        "Proof of enrolment or student ID.",
+                        "Income or residency certificate, if required.",
+                        "Bank details only through the verified official application process."
+                    ],
+                    officialUrl: "",
+                    sourceName: "Unverified demo source",
+                    sourceUrl: "",
+                    lastChecked: "",
+                    verified: false
+                },
+                {
+                    id: "demo-sch-002",
+                    title: "Future Leaders Education Grant — Demo Record",
+                    provider: "Sample Education Foundation",
+                    category: "Merit-based",
+                    amount: 40000,
+                    deadline: "2026-11-30",
+                    educationLevel: "Undergraduate",
+                    region: "India — confirm eligibility",
+                    target: "Students pursuing higher education who satisfy the actual programme rules.",
+                    description: "This sample record illustrates a higher-education grant listing. The name, amount and deadline are demonstration values and must not be treated as a real or currently available offer.",
+                    eligibility: [
+                        "Be enrolled in an eligible educational programme.",
+                        "Meet the programme's academic requirements.",
+                        "Meet any financial or residency criteria.",
+                        "Submit the complete application before the verified deadline."
+                    ],
+                    documents: [
+                        "Academic transcripts.",
+                        "Student identity or enrolment proof.",
+                        "Identity and address proof, if required.",
+                        "Financial documents, if applicable.",
+                        "A statement of purpose, if requested."
+                    ],
+                    officialUrl: "",
+                    sourceName: "Unverified demo source",
+                    sourceUrl: "",
+                    lastChecked: "",
+                    verified: false
+                },
+                {
+                    id: "demo-sch-003",
+                    title: "STEM Excellence Fellowship — Demo Record",
+                    provider: "Sample STEM Fellowship Council",
+                    category: "Research",
+                    amount: 60000,
+                    deadline: "2026-12-20",
+                    educationLevel: "Undergraduate / Research",
+                    region: "Eligibility not verified",
+                    target: "Students interested in science, technology, engineering or mathematics.",
+                    description: "An illustrative STEM fellowship entry for demonstrating scholarship detail pages. No real fellowship, provider or funding commitment is confirmed by this record.",
+                    eligibility: [
+                        "Pursue an eligible STEM course or research programme.",
+                        "Meet the academic criteria stated in the official call.",
+                        "Provide any requested project or research information.",
+                        "Meet the provider's applicable application rules."
+                    ],
+                    documents: [
+                        "Academic transcripts.",
+                        "Proof of enrolment.",
+                        "Resume or CV, if requested.",
+                        "Project or research summary, if applicable.",
+                        "Recommendation letters, if required."
+                    ],
+                    officialUrl: "",
+                    sourceName: "Unverified demo source",
+                    sourceUrl: "",
+                    lastChecked: "",
+                    verified: false
+                },
+                {
+                    id: "demo-sch-004",
+                    title: "Community Impact Student Grant — Demo Record",
+                    provider: "Sample Community Foundation",
+                    category: "Need-based",
+                    amount: 30000,
+                    deadline: "2026-11-15",
+                    educationLevel: "Undergraduate",
+                    region: "Eligibility not verified",
+                    target: "Students who meet the actual provider's financial and academic criteria.",
+                    description: "This is a fictional example of a need-based student grant. Confirm whether any real programme exists and verify its requirements directly with the responsible organisation.",
+                    eligibility: [
+                        "Meet the provider's financial eligibility rules.",
+                        "Be enrolled in an eligible course or institution.",
+                        "Meet any required academic conditions.",
+                        "Provide truthful and complete application information."
+                    ],
+                    documents: [
+                        "Academic records.",
+                        "Proof of enrolment.",
+                        "Income certificate or financial evidence, if required.",
+                        "Identity proof.",
+                        "Any additional documents requested by the provider."
+                    ],
+                    officialUrl: "",
+                    sourceName: "Unverified demo source",
+                    sourceUrl: "",
+                    lastChecked: "",
+                    verified: false
+                },
+                {
+                    id: "demo-sch-005",
+                    title: "Women in Technology Award — Demo Record",
+                    provider: "Sample Technology Foundation",
+                    category: "Special category",
+                    amount: 50000,
+                    deadline: "2027-01-10",
+                    educationLevel: "Undergraduate",
+                    region: "Eligibility not verified",
+                    target: "Applicants who meet the real programme's published criteria.",
+                    description: "An illustrative special-category award entry. Its title, award amount, deadline and eligibility details are not verified information about an actual scheme.",
+                    eligibility: [
+                        "Meet the published criteria of the actual programme.",
+                        "Be enrolled in the required academic level.",
+                        "Meet any course, residency or category conditions.",
+                        "Submit all requested supporting evidence."
+                    ],
+                    documents: [
+                        "Academic transcripts.",
+                        "Proof of enrolment.",
+                        "Identity proof.",
+                        "Supporting documents required by the actual programme.",
+                        "Personal statement, if requested."
+                    ],
+                    officialUrl: "",
+                    sourceName: "Unverified demo source",
+                    sourceUrl: "",
+                    lastChecked: "",
+                    verified: false
+                },
+                {
+                    id: "demo-sch-006",
+                    title: "Rural Student Support Grant — Demo Record",
+                    provider: "Sample Rural Education Trust",
+                    category: "Need-based",
+                    amount: 20000,
+                    deadline: "2026-12-05",
+                    educationLevel: "School / Undergraduate",
+                    region: "Eligibility not verified",
+                    target: "Students who satisfy the programme's real eligibility requirements.",
+                    description: "This fictional listing is included to demonstrate how a support grant can be displayed. Do not rely on it as evidence of an actual grant or application window.",
+                    eligibility: [
+                        "Meet the programme's educational criteria.",
+                        "Satisfy any location or financial requirements.",
+                        "Provide documents required by the actual provider.",
+                        "Verify application instructions before submission."
+                    ],
+                    documents: [
+                        "Latest academic marksheet.",
+                        "Student ID or enrolment proof.",
+                        "Identity proof.",
+                        "Income or residency documents, if required."
+                    ],
+                    officialUrl: "",
+                    sourceName: "Unverified demo source",
+                    sourceUrl: "",
+                    lastChecked: "",
+                    verified: false
+                },
+                {
+                    id: "demo-sch-007",
+                    title: "Emerging Innovators Fellowship — Demo Record",
+                    provider: "Sample Innovation Fellowship",
+                    category: "Research",
+                    amount: 75000,
+                    deadline: "2027-02-01",
+                    educationLevel: "Undergraduate / Postgraduate",
+                    region: "Eligibility not verified",
+                    target: "Applicants interested in innovation and research who meet the actual rules.",
+                    description: "A demonstration entry for an innovation fellowship. The record is fictional and does not confirm that funding is available.",
+                    eligibility: [
+                        "Meet the education-level requirements.",
+                        "Satisfy any research or project criteria.",
+                        "Provide evidence of eligibility.",
+                        "Complete the application in the official submission format."
+                    ],
+                    documents: [
+                        "Academic transcripts.",
+                        "Project proposal, if required.",
+                        "Resume or CV.",
+                        "Proof of enrolment.",
+                        "Recommendation letters, if required."
+                    ],
+                    officialUrl: "",
+                    sourceName: "Unverified demo source",
+                    sourceUrl: "",
+                    lastChecked: "",
+                    verified: false
+                },
+                {
+                    id: "demo-sch-008",
+                    title: "First-Generation Learner Award — Demo Record",
+                    provider: "Sample Learner Support Foundation",
+                    category: "Special category",
+                    amount: 35000,
+                    deadline: "2026-12-28",
+                    educationLevel: "Undergraduate",
+                    region: "Eligibility not verified",
+                    target: "Students meeting the actual provider's eligibility and documentation rules.",
+                    description: "This sample entry illustrates a scholarship that could support first-generation learners. It is not a verified offer or an announcement from a real provider.",
+                    eligibility: [
+                        "Meet the official programme's student eligibility criteria.",
+                        "Provide any required supporting family or educational information.",
+                        "Meet academic and residency conditions, if applicable.",
+                        "Submit all required information before the actual deadline."
+                    ],
+                    documents: [
+                        "Academic records.",
+                        "Proof of enrolment.",
+                        "Identity proof.",
+                        "Family or financial documents, if requested."
+                    ],
+                    officialUrl: "",
+                    sourceName: "Unverified demo source",
+                    sourceUrl: "",
+                    lastChecked: "",
+                    verified: false
+                },
+                {
+                    id: "demo-sch-009",
+                    title: "Academic Progress Scholarship — Demo Record",
+                    provider: "Sample Academic Support Council",
+                    category: "Merit-based",
+                    amount: 15000,
+                    deadline: "",
+                    educationLevel: "Undergraduate",
+                    region: "Eligibility not verified",
+                    target: "Students who meet the actual scheme's academic and enrolment requirements.",
+                    description: "A demonstration record with an unknown deadline. ScholarTrack should show an unknown deadline honestly instead of inventing a date.",
+                    eligibility: [
+                        "Meet the official academic requirements.",
+                        "Be enrolled in an eligible course.",
+                        "Meet any applicable financial or residency conditions.",
+                        "Confirm the application window with the actual provider."
+                    ],
+                    documents: [
+                        "Latest academic marksheet.",
+                        "Student identity or enrolment proof.",
+                        "Identity documents, if required.",
+                        "Additional supporting documents specified by the provider."
+                    ],
+                    officialUrl: "",
+                    sourceName: "Unverified demo source",
+                    sourceUrl: "",
+                    lastChecked: "",
+                    verified: false
+                }
+            ];
+
+            let currentScholarship = null;
+            let toastTimer = null;
+
+            $("#currentYear").textContent = new Date().getFullYear();
+
+            function showToast(message) {
+                const toast = $("#toastMessage");
+                toast.textContent = message;
+                toast.classList.add("show");
+
+                clearTimeout(toastTimer);
+
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 3000);
+            }
+
+            function escapeHTML(value) {
+                return String(value ?? "").replace(/[&<>"']/g, character => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+                })[character]);
+            }
+
+            function formatAmount(amount) {
+                if (amount === null || amount === undefined || amount === "") {
+                    return "Not specified";
+                }
+
+                const numericAmount = Number(amount);
+
+                if (!Number.isFinite(numericAmount)) {
+                    return "Not specified";
+                }
+
+                return new Intl.NumberFormat("en-IN", {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 0
+                }).format(numericAmount);
+            }
+
+            function formatDate(dateString) {
+                if (!dateString) {
+                    return "Not announced";
+                }
+
+                // Parse YYYY-MM-DD as a local calendar date to avoid UTC date shifts.
+                const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateString);
+
+                if (!match) {
+                    return "Date unavailable";
+                }
+
+                const year = Number(match[1]);
+                const month = Number(match[2]) - 1;
+                const day = Number(match[3]);
+                const date = new Date(year, month, day);
+
+                if (
+                    date.getFullYear() !== year ||
+                    date.getMonth() !== month ||
+                    date.getDate() !== day
+                ) {
+                    return "Date unavailable";
+                }
+
+                return date.toLocaleDateString("en-IN", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                });
+            }
+
+            function getDeadlineState(dateString) {
+                if (!dateString) {
+                    return {
+                        label: "Unknown",
+                        days: null,
+                        text: "The provider's deadline has not been supplied.",
+                        urgency: 0
+                    };
+                }
+
+                const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateString);
+
+                if (!match) {
+                    return {
+                        label: "Unknown",
+                        days: null,
+                        text: "The stored deadline is not in a supported date format.",
+                        urgency: 0
+                    };
+                }
+
+                const deadline = new Date(
+                    Number(match[1]),
+                    Number(match[2]) - 1,
+                    Number(match[3]),
+                    23, 59, 59
+                );
+
+                if (Number.isNaN(deadline.getTime())) {
+                    return {
+                        label: "Unknown",
+                        days: null,
+                        text: "Deadline could not be interpreted.",
+                        urgency: 0
+                    };
+                }
+
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                const deadlineDay = new Date(deadline);
+                deadlineDay.setHours(0, 0, 0, 0);
+
+                const days = Math.ceil(
+                    (deadlineDay.getTime() - today.getTime()) /
+                    (24 * 60 * 60 * 1000)
+                );
+
+                if (days < 0) {
+                    return {
+                        label: "Passed",
+                        days,
+                        text: "The stored deadline has passed. Confirm the current status with the provider.",
+                        urgency: 100
+                    };
+                }
+
+                if (days === 0) {
+                    return {
+                        label: "Today",
+                        days,
+                        text: "The stored deadline is today. Check the provider's exact closing time.",
+                        urgency: 100
+                    };
+                }
+
+                if (days <= 7) {
+                    return {
+                        label: "Urgent",
+                        days,
+                        text: "The stored deadline is approaching. Verify the official deadline immediately.",
+                        urgency: 90
+                    };
+                }
+
+                if (days <= 30) {
+                    return {
+                        label: "Upcoming",
+                        days,
+                        text: "The stored deadline is approaching. Prepare your documents early.",
+                        urgency: 60
+                    };
+                }
+
+                return {
+                    label: "Open window",
+                    days,
+                    text: "Time appears to remain according to the stored date. Verify that applications are open.",
+                    urgency: 25
+                };
+            }
+
+            function setText(selector, value) {
+                $(selector).textContent = value || "Not specified";
+            }
+
+            function renderList(selector, items) {
+                const element = $(selector);
+                element.replaceChildren();
+
+                (Array.isArray(items) ? items : []).forEach(item => {
+                    const li = document.createElement("li");
+                    const icon = document.createElement("i");
+                    const span = document.createElement("span");
+
+                    icon.className = "bi bi-check-circle";
+                    span.textContent = item;
+
+                    li.append(icon, span);
+                    element.appendChild(li);
+                });
+            }
+
+            function safeHttpsURL(value) {
+                if (!value) {
+                    return null;
+                }
+
+                try {
+                    const url = new URL(value);
+
+                    if (url.protocol !== "https:") {
+                        return null;
+                    }
+
+                    return url.href;
+                } catch {
+                    return null;
+                }
+            }
+
+            function readSavedIds() {
+                try {
+                    const parsed = JSON.parse(localStorage.getItem(DEMO_SAVED_KEY) || "[]");
+                    return Array.isArray(parsed) ? parsed.map(String) : [];
+                } catch {
+                    return [];
+                }
+            }
+
+            function updateSaveButton() {
+                const saved = readSavedIds();
+                const isSaved = saved.includes(String(currentScholarship.id));
+
+                $("#saveButton").innerHTML = isSaved
+                    ? '<i class="bi bi-bookmark-fill me-2"></i> Saved'
+                    : '<i class="bi bi-bookmark me-2"></i> Save scholarship';
+            }
+
+            function renderDeadline(deadline) {
+                const state = getDeadlineState(deadline);
+
+                setText("#deadlineDate", formatDate(deadline));
+                setText("#deadlineStatus", state.label);
+                setText("#urgencyLabel", state.label);
+                setText("#countdownMessage", state.text);
+
+                if (state.days === null) {
+                    setText("#countdownNumber", "N/A");
+                } else if (state.days < 0) {
+                    setText("#countdownNumber", "Passed");
+                } else if (state.days === 0) {
+                    setText("#countdownNumber", "Today");
+                } else {
+                    setText("#countdownNumber", `${state.days} days`);
+                }
+
+                $("#urgencyBar").style.width = `${state.urgency}%`;
+            }
+
+            function renderTrust(scholarship) {
+                const sourceURL = safeHttpsURL(scholarship.sourceUrl);
+                const officialURL = safeHttpsURL(scholarship.officialUrl);
+                const verified = scholarship.verified === true && Boolean(sourceURL);
+
+                if (verified) {
+                    setText("#trustHeading", "Source marked verified");
+                    setText("#trustDescription",
+                        "The backend marks this source as verified. Independently confirm the offer and application details before sharing personal information."
+                    );
+                    setText("#trustStatus", "Marked verified");
+                    $("#trustBar").style.width = "100%";
+                    $("#sourceName").textContent = scholarship.sourceName || "Verified source";
+                    $("#sourceDescription").textContent =
+                        "Source URL supplied by the record. Verify that it belongs to the responsible provider.";
+                    $("#sourceLink").hidden = false;
+                    $("#sourceLink").href = sourceURL;
+                    $("#sourceLink").target = "_blank";
+                    $("#sourceLink").rel = "noopener noreferrer";
+                } else {
+                    setText("#trustHeading", "Verification pending");
+                    setText("#trustDescription",
+                        "This demo record has no independently verified official source. Treat its details as unconfirmed."
+                    );
+                    setText("#trustStatus", "Not verified");
+                    $("#trustBar").style.width = "0%";
+                    $("#sourceName").textContent = scholarship.sourceName || "Unverified demo source";
+                    $("#sourceDescription").textContent =
+                        "No verified source attribution is available for this sample record.";
+                    $("#sourceLink").hidden = true;
+                    $("#sourceLink").removeAttribute("href");
+                }
+
+                const applyButton = $("#applyButton");
+
+                if (officialURL) {
+                    applyButton.disabled = false;
+                    applyButton.innerHTML =
+                        '<i class="bi bi-box-arrow-up-right me-2"></i> Visit application site';
+                    applyButton.dataset.url = officialURL;
+                } else {
+                    applyButton.disabled = true;
+                    applyButton.removeAttribute("data-url");
+                    applyButton.innerHTML =
+                        '<i class="bi bi-exclamation-circle me-2"></i> Official application unavailable';
+                }
+            }
+
+            function renderScholarship(scholarship) {
+                currentScholarship = scholarship;
+
+                $("#loadingState").style.display = "none";
+                $("#notFoundState").style.display = "none";
+                $("#detailsContent").style.display = "block";
+
+                setText("#scholarshipCategory", scholarship.category || "Scholarship opportunity");
+                setText("#scholarshipTitle", scholarship.title);
+                setText("#scholarshipProvider", scholarship.provider);
+                setText("#awardAmount", formatAmount(scholarship.amount));
+                setText("#educationLevel", scholarship.educationLevel);
+                setText("#scholarshipDescription", scholarship.description);
+                setText("#targetApplicants", scholarship.target);
+                setText("#eligibleRegion", scholarship.region);
+                setText("#applicationPeriod", scholarship.deadline
+                    ? `Listed deadline: ${formatDate(scholarship.deadline)}. Confirm the current application period with the provider.`
+                    : "The deadline and application period have not been supplied."
+                );
+                setText("#lastChecked", scholarship.lastChecked
+                    ? formatDate(scholarship.lastChecked)
+                    : "Not available in demo data"
+                );
+                setText("#recordId", scholarship.id);
+
+                const badges = $("#scholarshipBadges");
+                badges.replaceChildren();
+
+                const badgeData = [
+                    scholarship.category || "Category unspecified",
+                    scholarship.educationLevel || "Education level unspecified",
+                    "Demo record — unverified"
+                ];
+
+                badgeData.forEach((label, index) => {
+                    const span = document.createElement("span");
+                    span.className = `pill${index === 2 ? "" : " green"}`;
+                    span.textContent = label;
+                    badges.appendChild(span);
+                });
+
+                renderList("#eligibilityList", scholarship.eligibility);
+                renderList("#documentsList", scholarship.documents);
+                renderDeadline(scholarship.deadline);
+                renderTrust(scholarship);
+                updateSaveButton();
+                updateReadiness();
+
+                document.title = `${scholarship.title} | ScholarTrack`;
+            }
+
+            function updateReadiness() {
+                const checks = Array.from(document.querySelectorAll(".eligibility-check"));
+                const completed = checks.filter(check => check.checked).length;
+                const percent = Math.round((completed / checks.length) * 100);
+
+                $("#readinessPercent").textContent = `${percent}%`;
+                $("#readinessBar").style.width = `${percent}%`;
+            }
+
+            async function loadScholarship() {
+                const params = new URLSearchParams(window.location.search);
+                const id = params.get("id");
+
+                if (!id) {
+                    $("#loadingState").style.display = "none";
+                    $("#notFoundState").style.display = "block";
+                    return;
+                }
+
+                /*
+                 * Future backend integration:
+                 *
+                 * const response = await fetch(
+                 *   `http://127.0.0.1:5000/api/scholarships/${encodeURIComponent(id)}`,
+                 *   { credentials: "include" }
+                 * );
+                 *
+                 * if (!response.ok) throw new Error("Scholarship not found");
+                 * const scholarship = await response.json();
+                 * renderScholarship(scholarship);
+                 *
+                 * Keep the demo fallback only during frontend development.
+                 */
+
+                const scholarship = demoScholarships.find(item => item.id === id);
+
+                if (!scholarship) {
+                    $("#loadingState").style.display = "none";
+                    $("#notFoundState").style.display = "block";
+                    return;
+                }
+
+                renderScholarship(scholarship);
+            }
+
+            $("#saveButton").addEventListener("click", () => {
+                if (!currentScholarship) return;
+
+                const id = String(currentScholarship.id);
+                const saved = readSavedIds();
+                const index = saved.indexOf(id);
+
+                if (index >= 0) {
+                    saved.splice(index, 1);
+                    showToast("Removed from saved scholarships.");
+                } else {
+                    saved.push(id);
+                    showToast("Scholarship saved on this browser.");
+                }
+
+                try {
+                    localStorage.setItem(DEMO_SAVED_KEY, JSON.stringify(saved));
+                } catch {
+                    showToast("Unable to save. Browser storage may be unavailable.");
+                }
+
+                updateSaveButton();
+            });
+
+            $("#applyButton").addEventListener("click", () => {
+                const url = safeHttpsURL($("#applyButton").dataset.url);
+
+                if (!url) {
+                    showToast("No verified application URL is available in this demo record.");
+                    return;
+                }
+
+                window.open(url, "_blank", "noopener,noreferrer");
+            });
+
+            $("#shareButton").addEventListener("click", async () => {
+                if (!currentScholarship) return;
+
+                const shareData = {
+                    title: currentScholarship.title,
+                    text: "Review this scholarship record on ScholarTrack. Verify the provider before applying.",
+                    url: window.location.href
+                };
+
+                try {
+                    if (navigator.share) {
+                        await navigator.share(shareData);
+                    } else if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(window.location.href);
+                        showToast("Page link copied.");
+                    } else {
+                        showToast("Copy the page address from your browser to share it.");
+                    }
+                } catch (error) {
+                    if (error.name !== "AbortError") {
+                        showToast("Unable to share this page right now.");
+                    }
+                }
+            });
+
+            $("#checkEligibilityButton").addEventListener("click", () => {
+                const checks = Array.from(document.querySelectorAll(".eligibility-check"));
+                const completed = checks.filter(check => check.checked).length;
+                const result = $("#eligibilityResult");
+
+                result.classList.add("show");
+
+                if (completed === checks.length) {
+                    result.textContent =
+                        "You completed all four self-checks. This does not confirm eligibility. Review the provider's official rules and supporting documents before applying.";
+                } else {
+                    result.textContent =
+                        `You completed ${completed} of ${checks.length} checks. Review the remaining requirements before preparing your application. This is a self-assessment, not an official eligibility decision.`;
+                }
+            });
+
+            document.querySelectorAll(".eligibility-check").forEach(check => {
+                check.addEventListener("change", updateReadiness);
+            });
+
+            $("#logoutButton").addEventListener("click", async () => {
+                /*
+                 * Connect this to Flask session logout when the backend is ready.
+                 * Demo mode does not authenticate or invalidate a server session.
+                 */
+
+                try {
+                    await fetch("http://127.0.0.1:5000/api/auth/logout", {
+                        method: "POST",
+                        credentials: "include"
+                    });
+                } catch {
+                    // The backend may not be running during frontend development.
+                }
+
+                window.location.href = "login.html";
+            });
+
+            loadScholarship();
+        })();
+    </script>
+</body>
+</html>

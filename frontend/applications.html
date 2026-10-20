@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Applications | ScholarTrack</title>
+    <meta name="description" content="Track scholarship applications, monitor deadlines and manage application progress with ScholarTrack.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --page-background: #739B8A;
+            --surface: #FFFFFF;
+            --surface-light: #F8FAF9;
+            --hero-background: #087F63;
+            --primary: #10DFA0;
+            --primary-hover: #066B53;
+            --text-primary: #17251F;
+            --text-secondary: #64756D;
+            --border: #DCE8E1;
+            --warning: #E9A23B;
+            --danger: #D9534F;
+
+            --bg: var(--page-background);
+            --text: #17251F;
+            --muted: #64756D;
+            --green: #087F63;
+            --yellow: #E9A23B;
+            --blue: #087F63;
+            --red: #D9534F;
+            --purple: #066B53;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "DM Sans", sans-serif;
+            padding: 24px 20px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0;
+            }
+        }
+
+        .navbar {
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+        }
+
+        .navbar-brand {
+            color: var(--text);
+            font-family: "Manrope", sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: -.05em;
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            margin-right: 9px;
+            border-radius: 11px;
+            background: var(--green);
+            color: #FFFFFF;
+        }
+
+        .brand-accent {
+            color: var(--green);
+        }
+
+        .nav-link {
+            color: var(--muted);
+            padding: 9px 13px !important;
+            font-size: .9rem;
+            font-weight: 600;
+            transition: color .2s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--green);
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 9px 14px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .btn-outline-custom:hover {
+            color: var(--green);
+            border-color: var(--green);
+        }
+
+        .btn-green {
+            border: 0;
+            border-radius: 11px;
+            background: var(--primary);
+            color: #17251F;
+            padding: 11px 16px;
+            font-weight: 800;
+            box-shadow: 0 4px 14px rgba(16, 223, 160, 0.35);
+            transition: transform .2s ease, background .2s ease, color .2s ease;
+        }
+
+        .btn-green:hover {
+            background: var(--primary-hover);
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .btn-soft {
+            border: 1px solid rgba(155,230,176,.2);
+            border-radius: 10px;
+            background: rgba(155,230,176,.07);
+            color: var(--green);
+            padding: 9px 13px;
+            font-weight: 700;
+        }
+
+        .btn-soft:hover {
+            background: rgba(155,230,176,.15);
+            color: var(--green);
+        }
+
+        .page-container {
+            max-width: 1300px;
+            margin: auto;
+            padding: 35px 24px 70px;
+        }
+
+        .breadcrumb-line {
+            color: var(--muted);
+            font-size: .85rem;
+            margin-bottom: 27px;
+        }
+
+        .breadcrumb-line a {
+            color: var(--green);
+        }
+
+        .breadcrumb-line i {
+            margin: 0 9px;
+            font-size: .7rem;
+        }
+
+        .eyebrow {
+            color: var(--green);
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 12px 0;
+        }
+
+        .page-description {
+            max-width: 680px;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 22px;
+            margin-bottom: 28px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 17px;
+            margin-bottom: 28px;
+        }
+
+        .summary-card {
+            padding: 22px;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            background: var(--surface);
+            transition: transform .2s ease, border-color .2s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(155,230,176,.25);
+        }
+
+        .summary-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: rgba(155,230,176,.09);
+            color: var(--green);
+            font-size: 1.25rem;
+            margin-bottom: 17px;
+        }
+
+        .summary-label {
+            color: var(--muted);
+            font-size: .81rem;
+            margin-bottom: 6px;
+        }
+
+        .summary-value {
+            font-family: "Manrope", sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .summary-note {
+            color: var(--muted);
+            font-size: .76rem;
+            margin-top: 5px;
+        }
+
+        .panel {
+            padding: 25px;
+            border: 1px solid var(--border);
+            border-radius: 19px;
+            background: var(--surface);
+            margin-bottom: 23px;
+        }
+
+        .panel-title {
+            font-size: 1.12rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .panel-description {
+            color: var(--muted);
+            font-size: .85rem;
+            line-height: 1.7;
+            margin-bottom: 21px;
+        }
+
+        .filters-row {
+            display: grid;
+            grid-template-columns: minmax(180px, 1.6fr) repeat(2, minmax(140px, 1fr)) auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .form-label {
+            color: var(--text);
+            font-size: .85rem;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .form-control,
+        .form-select {
+            background-color: #FFFFFF;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            min-height: 44px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            background-color: #FFFFFF;
+            color: var(--text);
+            border-color: var(--hero-background);
+            box-shadow: 0 0 0 3px rgba(8, 127, 99, 0.12);
+        }
+
+        .form-control::placeholder {
+            color: #8A9D94;
+        }
+
+        .form-select option {
+            background: #FFFFFF;
+            color: var(--text);
+        }
+
+        .application-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .application-card {
+            padding: 22px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: var(--surface);
+            transition: border-color .2s ease, transform .2s ease;
+        }
+
+        .application-card:hover {
+            border-color: rgba(155,230,176,.25);
+            transform: translateY(-2px);
+        }
+
+        .application-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 17px;
+        }
+
+        .application-main {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            min-width: 0;
+        }
+
+        .application-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 47px;
+            height: 47px;
+            border-radius: 13px;
+            background: rgba(155,230,176,.09);
+            color: var(--green);
+            flex-shrink: 0;
+            font-size: 1.3rem;
+        }
+
+        .application-title {
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.5;
+            margin-bottom: 5px;
+            overflow-wrap: anywhere;
+        }
+
+        .application-provider {
+            color: var(--muted);
+            font-size: .82rem;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 7px 10px;
+            border-radius: 30px;
+            font-size: .75rem;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .status-draft {
+            color: var(--yellow);
+            background: rgba(245,213,139,.09);
+            border: 1px solid rgba(245,213,139,.18);
+        }
+
+        .status-submitted {
+            color: var(--blue);
+            background: rgba(145,201,255,.08);
+            border: 1px solid rgba(145,201,255,.18);
+        }
+
+        .status-review {
+            color: var(--purple);
+            background: rgba(197,165,255,.08);
+            border: 1px solid rgba(197,165,255,.18);
+        }
+
+        .status-approved {
+            color: var(--green);
+            background: rgba(155,230,176,.08);
+            border: 1px solid rgba(155,230,176,.18);
+        }
+
+        .status-rejected {
+            color: var(--red);
+            background: rgba(255,157,157,.08);
+            border: 1px solid rgba(255,157,157,.18);
+        }
+
+        .application-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 17px;
+            margin: 17px 0;
+            color: var(--muted);
+            font-size: .79rem;
+        }
+
+        .application-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .application-meta i {
+            color: var(--green);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            color: var(--muted);
+            font-size: .78rem;
+            margin-bottom: 8px;
+        }
+
+        .progress {
+            height: 6px;
+            border-radius: 20px;
+            background: #EAEFEA;
+        }
+
+        .progress-bar {
+            background: var(--green);
+            border-radius: 20px;
+        }
+
+        .application-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .application-actions .btn {
+            font-size: .8rem;
+        }
+
+        .empty-state {
+            padding: 55px 20px;
+            text-align: center;
+            border: 1px dashed rgba(255,255,255,.15);
+            border-radius: 16px;
+            color: var(--muted);
+        }
+
+        .empty-state i {
+            display: block;
+            font-size: 2.5rem;
+            color: var(--green);
+            margin-bottom: 14px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .deadline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .deadline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+        }
+
+        .deadline-date {
+            width: 48px;
+            min-width: 48px;
+            padding: 9px 4px;
+            text-align: center;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            background: rgba(255,255,255,.025);
+        }
+
+        .deadline-date strong {
+            display: block;
+            font-size: 1rem;
+            color: var(--green);
+        }
+
+        .deadline-date span {
+            display: block;
+            color: var(--muted);
+            font-size: .65rem;
+            text-transform: uppercase;
+        }
+
+        .deadline-details {
+            min-width: 0;
+        }
+
+        .deadline-details strong {
+            display: block;
+            font-size: .87rem;
+            line-height: 1.5;
+        }
+
+        .deadline-details span {
+            display: block;
+            color: var(--muted);
+            font-size: .77rem;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
+        .note-box {
+            border: 1px solid rgba(233, 162, 59, 0.25);
+            background: #FEF8ED;
+            color: #925805;
+            border-radius: 12px;
+            padding: 13px 15px;
+            font-size: .82rem;
+            line-height: 1.7;
+        }
+
+        .modal-content {
+            background: #FFFFFF;
+            color: var(--text);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(23, 37, 31, 0.16);
+        }
+
+        .modal-header,
+        .modal-footer {
+            border-color: var(--border);
+        }
+
+        .toast-message {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 2000;
+            max-width: min(370px, calc(100vw - 44px));
+            padding: 15px 18px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: #FFFFFF;
+            color: var(--text);
+            box-shadow: 0 16px 40px rgba(23, 37, 31, 0.14);
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: opacity .2s ease, transform .2s ease;
+        }
+
+        .toast-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer {
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            padding: 25px 0;
+            font-size: .82rem;
+        }
+
+        .fade-up {
+            animation: fadeUp .45s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .summary-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .filters-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 767px) {
+            .page-container {
+                padding: 25px 15px 45px;
+            }
+
+            .header-row {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .header-row > .btn {
+                width: 100%;
+            }
+
+            .panel {
+                padding: 21px 17px;
+            }
+
+            .summary-card {
+                padding: 17px;
+            }
+
+            .summary-value {
+                font-size: 1.5rem;
+            }
+
+            .filters-row {
+                grid-template-columns: 1fr;
+            }
+
+            .application-card {
+                padding: 17px;
+            }
+
+            .application-top {
+                flex-direction: column;
+            }
+
+            .application-top > .status-badge {
+                align-self: flex-start;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid px-lg-5">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <span class="brand-mark">
+                    <i class="bi bi-mortarboard-fill"></i>
+                </span>
+                Scholar<span class="brand-accent">Track</span>
+            </a>
+
+            <button class="navbar-toggler btn-outline-custom" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#mainNavigation"
+                    aria-controls="mainNavigation" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav ms-auto align-items-lg-center mt-3 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="scholarships.html">Scholarships</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="eligibility.html">Eligibility</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="applications.html">Applications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">My Profile</a>
+                    </li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <button class="btn btn-outline-custom btn-sm" id="logoutButton">
+                            <i class="bi bi-box-arrow-right me-1"></i> Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-container">
+
+        <div class="breadcrumb-line">
+            <a href="dashboard.html">Dashboard</a>
+            <i class="bi bi-chevron-right"></i>
+            <span>My Applications</span>
+        </div>
+
+        <!-- Header -->
+        <section class="header-row fade-up">
+            <div>
+                <div class="eyebrow">Application management</div>
+                <h1 class="page-title">My applications</h1>
+                <p class="page-description mb-0">
+                    Keep track of your scholarship applications, review their progress
+                    and stay aware of important dates.
+                </p>
+            </div>
+
+            <a href="scholarships.html" class="btn btn-green">
+                <i class="bi bi-plus-lg me-2"></i>
+                Explore scholarships
+            </a>
+        </section>
+
+        <!-- Summary -->
+        <section class="summary-grid fade-up">
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="bi bi-folder2-open"></i>
+                </div>
+                <div class="summary-label">Total applications</div>
+                <div class="summary-value" id="totalCount">0</div>
+                <div class="summary-note">Tracked in this browser</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="bi bi-hourglass-split"></i>
+                </div>
+                <div class="summary-label">In progress</div>
+                <div class="summary-value" id="progressCount">0</div>
+                <div class="summary-note">Draft, submitted or under review</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="bi bi-check-circle"></i>
+                </div>
+                <div class="summary-label">Approved</div>
+                <div class="summary-value" id="approvedCount">0</div>
+                <div class="summary-note">Marked approved by you</div>
+            </div>
+
+            <div class="summary-card">
+                <div class="summary-icon">
+                    <i class="bi bi-calendar-event"></i>
+                </div>
+                <div class="summary-label">Upcoming deadlines</div>
+                <div class="summary-value" id="deadlineCount">0</div>
+                <div class="summary-note">Based on stored dates</div>
+            </div>
+        </section>
+
+        <!-- Deadline panel -->
+        <section class="panel fade-up">
+            <h2 class="panel-title">
+                <i class="bi bi-calendar2-week me-2" style="color:var(--green)"></i>
+                Upcoming deadlines
+            </h2>
+
+            <p class="panel-description">
+                Deadlines for applications you are tracking. Verify every date with the official provider.
+            </p>
+
+            <div id="deadlineList" class="deadline-list"></div>
+        </section>
+
+        <!-- Application list -->
+        <section class="panel fade-up">
+            <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-4">
+                <div>
+                    <h2 class="panel-title">Application tracker</h2>
+                    <p class="panel-description mb-0">
+                        Search, filter and update your locally tracked applications.
+                    </p>
+                </div>
+
+                <button class="btn btn-soft align-self-start" id="exportButton">
+                    <i class="bi bi-download me-2"></i>
+                    Export CSV
+                </button>
+            </div>
+
+            <div class="filters-row mb-4">
+                <div>
+                    <label class="form-label" for="searchInput">Search applications</label>
+                    <input type="search" class="form-control" id="searchInput"
+                           placeholder="Search by scholarship name...">
+                </div>
+
+                <div>
+                    <label class="form-label" for="statusFilter">Application status</label>
+                    <select class="form-select" id="statusFilter">
+                        <option value="all">All statuses</option>
+                        <option value="draft">Draft</option>
+                        <option value="submitted">Submitted</option>
+                        <option value="review">Under review</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label" for="sortFilter">Sort by</label>
+                    <select class="form-select" id="sortFilter">
+                        <option value="deadline">Deadline</option>
+                        <option value="name">Scholarship name</option>
+                        <option value="recent">Recently updated</option>
+                    </select>
+                </div>
+
+                <div>
+                    <button class="btn btn-outline-custom w-100" id="clearFiltersButton">
+                        <i class="bi bi-x-circle me-1"></i> Clear
+                    </button>
+                </div>
+            </div>
+
+            <div id="applicationList" class="application-list"></div>
+
+            <div class="empty-state" id="emptyState" style="display:none;">
+                <i class="bi bi-folder2-open"></i>
+                <h3>No applications found</h3>
+                <p class="mb-3">
+                    Start tracking a scholarship or change your search filters.
+                </p>
+                <a href="scholarships.html" class="btn btn-green">
+                    Explore scholarships
+                </a>
+            </div>
+        </section>
+
+        <div class="note-box">
+            <i class="bi bi-info-circle me-2"></i>
+            <strong>Demo mode:</strong> Application records and status updates are stored in this browser only.
+            They are not submitted to scholarship providers, and they are not synchronized with a server.
+            Use the official provider's portal to submit a real application.
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container-fluid px-lg-5 d-flex flex-column flex-md-row justify-content-between gap-2">
+            <span>© <span id="currentYear"></span> ScholarTrack</span>
+            <span>Organize your applications. Keep your next step clear.</span>
+        </div>
+    </footer>
+
+    <!-- Update status modal -->
+    <div class="modal fade" id="statusModal" tabindex="-1"
+         aria-labelledby="statusModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form id="statusForm">
+                    <div class="modal-header">
+                        <h2 class="modal-title fs-5" id="statusModalTitle">
+                            Update application
+                        </h2>
+
+                        <button type="button" class="btn-close"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <p class="text-secondary small" id="modalScholarshipName"></p>
+
+                        <input type="hidden" id="editingApplicationId">
+
+                        <div class="mb-3">
+                            <label class="form-label" for="newStatus">Application status</label>
+
+                            <select class="form-select" id="newStatus" required>
+                                <option value="draft">Draft</option>
+                                <option value="submitted">Submitted</option>
+                                <option value="review">Under review</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="applicationNotes">Personal notes</label>
+                            <textarea class="form-control" id="applicationNotes"
+                                      rows="4" maxlength="1000"
+                                      placeholder="Example: Documents prepared, waiting for confirmation..."></textarea>
+                            <div class="form-text text-secondary">
+                                Avoid entering passwords, bank details or other sensitive information.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-custom"
+                                data-bs-dismiss="modal">Cancel</button>
+
+                        <button type="submit" class="btn btn-green">
+                            Save changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-message" id="toastMessage" role="status" aria-live="polite"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        (() => {
+            "use strict";
+
+            const $ = selector => document.querySelector(selector);
+
+            const STORAGE_KEY = "scholartrack_demo_applications";
+            const SAVED_KEY = "scholartrack_demo_saved";
+
+            const VALID_STATUSES = [
+                "draft",
+                "submitted",
+                "review",
+                "approved",
+                "rejected"
+            ];
+
+            const STATUS_LABELS = {
+                draft: "Draft",
+                submitted: "Submitted",
+                review: "Under review",
+                approved: "Approved",
+                rejected: "Rejected"
+            };
+
+            const STATUS_CLASSES = {
+                draft: "status-draft",
+                submitted: "status-submitted",
+                review: "status-review",
+                approved: "status-approved",
+                rejected: "status-rejected"
+            };
+
+            /*
+             * DEMO DATA ONLY.
+             * These sample records are not real applications.
+             *
+             * Future Flask integration:
+             * GET    /api/applications
+             * POST   /api/applications
+             * PATCH  /api/applications/<id>
+             * DELETE /api/applications/<id>
+             */
+
+            const demoApplications = [
+                {
+                    id: "app-demo-001",
+                    scholarshipId: "demo-sch-001",
+                    title: "National Merit Scholarship — Demo Record",
+                    provider: "Sample Government Scholarship Provider",
+                    amount: 25000,
+                    deadline: "2026-12-15",
+                    status: "draft",
+                    notes: "Demo record: review eligibility and required documents.",
+                    updatedAt: "2026-10-15T10:00:00"
+                },
+                {
+                    id: "app-demo-002",
+                    scholarshipId: "demo-sch-003",
+                    title: "STEM Excellence Fellowship — Demo Record",
+                    provider: "Sample STEM Fellowship Council",
+                    amount: 60000,
+                    deadline: "2026-12-20",
+                    status: "submitted",
+                    notes: "Demo record: confirm actual submission with the provider.",
+                    updatedAt: "2026-10-14T15:30:00"
+                },
+                {
+                    id: "app-demo-003",
+                    scholarshipId: "demo-sch-004",
+                    title: "Community Impact Student Grant — Demo Record",
+                    provider: "Sample Community Foundation",
+                    amount: 30000,
+                    deadline: "2026-11-15",
+                    status: "review",
+                    notes: "Demo record: status is illustrative, not provider-confirmed.",
+                    updatedAt: "2026-10-12T09:00:00"
+                }
+            ];
+
+            let applications = [];
+            let toastTimer = null;
+            let statusModal = null;
+
+            $("#currentYear").textContent = new Date().getFullYear();
+
+            function escapeHTML(value) {
+                return String(value ?? "").replace(/[&<>"']/g, character => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+                })[character]);
+            }
+
+            function showToast(message) {
+                const toast = $("#toastMessage");
+                toast.textContent = message;
+                toast.classList.add("show");
+
+                clearTimeout(toastTimer);
+
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 3000);
+            }
+
+            function formatAmount(amount) {
+                if (amount === null || amount === undefined || amount === "") {
+                    return "Not specified";
+                }
+
+                const numericAmount = Number(amount);
+
+                if (!Number.isFinite(numericAmount)) {
+                    return "Not specified";
+                }
+
+                return new Intl.NumberFormat("en-IN", {
+                    style: "currency",
+                    currency: "INR",
+                    maximumFractionDigits: 0
+                }).format(numericAmount);
+            }
+
+            function parseLocalDate(dateString) {
+                if (!dateString) return null;
+
+                const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateString);
+
+                if (!match) return null;
+
+                const year = Number(match[1]);
+                const month = Number(match[2]) - 1;
+                const day = Number(match[3]);
+
+                const date = new Date(year, month, day);
+
+                if (
+                    date.getFullYear() !== year ||
+                    date.getMonth() !== month ||
+                    date.getDate() !== day
+                ) {
+                    return null;
+                }
+
+                return date;
+            }
+
+            function formatDate(dateString) {
+                const date = parseLocalDate(dateString);
+
+                if (!date) return "Unknown";
+
+                return date.toLocaleDateString("en-IN", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric"
+                });
+            }
+
+            function getDaysRemaining(deadline) {
+                const date = parseLocalDate(deadline);
+
+                if (!date) return null;
+
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                date.setHours(0, 0, 0, 0);
+
+                return Math.ceil(
+                    (date.getTime() - today.getTime()) /
+                    (24 * 60 * 60 * 1000)
+                );
+            }
+
+            function readLocalApplications() {
+                try {
+                    const stored = JSON.parse(
+                        localStorage.getItem(STORAGE_KEY) || "null"
+                    );
+
+                    if (!Array.isArray(stored)) {
+                        return null;
+                    }
+
+                    return stored.filter(item => {
+                        return item &&
+                            typeof item.id === "string" &&
+                            typeof item.title === "string" &&
+                            VALID_STATUSES.includes(item.status);
+                    });
+                } catch {
+                    return null;
+                }
+            }
+
+            function persistApplications() {
+                try {
+                    localStorage.setItem(
+                        STORAGE_KEY,
+                        JSON.stringify(applications)
+                    );
+                    return true;
+                } catch {
+                    showToast("Browser storage is unavailable. Changes may not persist.");
+                    return false;
+                }
+            }
+
+            function loadApplications() {
+                const stored = readLocalApplications();
+
+                applications = stored === null
+                    ? demoApplications.map(item => ({ ...item }))
+                    : stored;
+
+                if (stored === null) {
+                    persistApplications();
+                }
+            }
+
+            function getStatusBadge(status) {
+                const safeStatus = VALID_STATUSES.includes(status)
+                    ? status
+                    : "draft";
+
+                return `
+                    <span class="status-badge ${STATUS_CLASSES[safeStatus]}">
+                        <i class="bi bi-circle-fill" style="font-size:.42rem"></i>
+                        ${STATUS_LABELS[safeStatus]}
+                    </span>
+                `;
+            }
+
+            function getProgress(status) {
+                const progress = {
+                    draft: 25,
+                    submitted: 55,
+                    review: 75,
+                    approved: 100,
+                    rejected: 100
+                };
+
+                return progress[status] ?? 0;
+            }
+
+            function getFilteredApplications() {
+                const query = $("#searchInput").value.trim().toLowerCase();
+                const selectedStatus = $("#statusFilter").value;
+                const sortBy = $("#sortFilter").value;
+
+                const filtered = applications.filter(application => {
+                    const matchesQuery =
+                        application.title.toLowerCase().includes(query) ||
+                        String(application.provider || "").toLowerCase().includes(query);
+
+                    const matchesStatus =
+                        selectedStatus === "all" ||
+                        application.status === selectedStatus;
+
+                    return matchesQuery && matchesStatus;
+                });
+
+                filtered.sort((a, b) => {
+                    if (sortBy === "name") {
+                        return a.title.localeCompare(b.title);
+                    }
+
+                    if (sortBy === "recent") {
+                        return new Date(b.updatedAt || 0) -
+                            new Date(a.updatedAt || 0);
+                    }
+
+                    const dateA = parseLocalDate(a.deadline);
+                    const dateB = parseLocalDate(b.deadline);
+
+                    if (!dateA && !dateB) return 0;
+                    if (!dateA) return 1;
+                    if (!dateB) return -1;
+
+                    return dateA - dateB;
+                });
+
+                return filtered;
+            }
+
+            function renderApplication(application) {
+                const progress = getProgress(application.status);
+                const deadlineDays = getDaysRemaining(application.deadline);
+
+                let deadlineLabel = "Deadline unknown";
+
+                if (deadlineDays !== null) {
+                    if (deadlineDays < 0) {
+                        deadlineLabel = "Stored deadline has passed";
+                    } else if (deadlineDays === 0) {
+                        deadlineLabel = "Stored deadline is today";
+                    } else {
+                        deadlineLabel = `${deadlineDays} days remaining`;
+                    }
+                }
+
+                const notes = application.notes
+                    ? escapeHTML(application.notes)
+                    : "No personal notes added.";
+
+                return `
+                    <article class="application-card fade-up">
+                        <div class="application-top">
+                            <div class="application-main">
+                                <div class="application-icon">
+                                    <i class="bi bi-mortarboard"></i>
+                                </div>
+
+                                <div>
+                                    <h3 class="application-title">
+                                        ${escapeHTML(application.title)}
+                                    </h3>
+
+                                    <div class="application-provider">
+                                        ${escapeHTML(application.provider || "Provider not specified")}
+                                    </div>
+                                </div>
+                            </div>
+
+                            ${getStatusBadge(application.status)}
+                        </div>
+
+                        <div class="application-meta">
+                            <span>
+                                <i class="bi bi-cash-stack"></i>
+                                ${escapeHTML(formatAmount(application.amount))}
+                            </span>
+
+                            <span>
+                                <i class="bi bi-calendar-event"></i>
+                                ${escapeHTML(formatDate(application.deadline))}
+                            </span>
+
+                            <span>
+                                <i class="bi bi-clock"></i>
+                                ${escapeHTML(deadlineLabel)}
+                            </span>
+                        </div>
+
+                        <div class="progress-header">
+                            <span>Tracking progress</span>
+                            <span>${progress}%</span>
+                        </div>
+
+                        <div class="progress">
+                            <div class="progress-bar"
+                                 style="width:${progress}%"></div>
+                        </div>
+
+                        <div class="mt-3 small text-secondary">
+                            <i class="bi bi-journal-text me-1"></i>
+                            ${notes}
+                        </div>
+
+                        <div class="application-actions">
+                            <button class="btn btn-soft edit-status-button"
+                                    data-id="${escapeHTML(application.id)}">
+                                <i class="bi bi-pencil-square me-1"></i>
+                                Update status
+                            </button>
+
+                            <a class="btn btn-outline-custom"
+                               href="scholarship-details.html?id=${encodeURIComponent(application.scholarshipId || "")}">
+                                <i class="bi bi-eye me-1"></i>
+                                View scholarship
+                            </a>
+
+                            <button class="btn btn-outline-custom remove-application-button"
+                                    data-id="${escapeHTML(application.id)}">
+                                <i class="bi bi-trash3 me-1"></i>
+                                Remove
+                            </button>
+                        </div>
+                    </article>
+                `;
+            }
+
+            function renderApplications() {
+                const filtered = getFilteredApplications();
+                const list = $("#applicationList");
+
+                list.innerHTML = "";
+
+                $("#emptyState").style.display = filtered.length ? "none" : "block";
+
+                if (!filtered.length) {
+                    $("#emptyState").innerHTML = `
+                        <i class="bi bi-folder2-open"></i>
+                        <h3>No applications found</h3>
+                        <p class="mb-3">
+                            Try another filter or add a scholarship from your tracker.
+                        </p>
+                        <a href="scholarships.html" class="btn btn-green">
+                            Explore scholarships
+                        </a>
+                    `;
+                }
+
+                filtered.forEach(application => {
+                    list.insertAdjacentHTML(
+                        "beforeend",
+                        renderApplication(application)
+                    );
+                });
+            }
+
+            function renderSummary() {
+                const total = applications.length;
+
+                const approved = applications.filter(
+                    item => item.status === "approved"
+                ).length;
+
+                const inProgress = applications.filter(
+                    item => ["draft", "submitted", "review"].includes(item.status)
+                ).length;
+
+                const upcoming = applications.filter(item => {
+                    const days = getDaysRemaining(item.deadline);
+                    return days !== null && days >= 0 && days <= 30;
+                }).length;
+
+                $("#totalCount").textContent = total;
+                $("#progressCount").textContent = inProgress;
+                $("#approvedCount").textContent = approved;
+                $("#deadlineCount").textContent = upcoming;
+            }
+
+            function renderDeadlines() {
+                const container = $("#deadlineList");
+
+                const upcoming = applications
+                    .filter(item => {
+                        const days = getDaysRemaining(item.deadline);
+                        return days !== null && days >= 0;
+                    })
+                    .sort((a, b) => {
+                        return getDaysRemaining(a.deadline) -
+                            getDaysRemaining(b.deadline);
+                    })
+                    .slice(0, 5);
+
+                container.innerHTML = "";
+
+                if (!upcoming.length) {
+                    container.innerHTML = `
+                        <div class="text-secondary small">
+                            No upcoming deadlines with known dates.
+                            Check the provider's official website for current deadlines.
+                        </div>
+                    `;
+                    return;
+                }
+
+                upcoming.forEach(application => {
+                    const date = parseLocalDate(application.deadline);
+                    const days = getDaysRemaining(application.deadline);
+
+                    const month = date.toLocaleDateString("en-IN", {
+                        month: "short"
+                    });
+
+                    const day = date.toLocaleDateString("en-IN", {
+                        day: "2-digit"
+                    });
+
+                    let message = days === 0
+                        ? "Stored deadline is today"
+                        : days === 1
+                            ? "1 day remaining"
+                            : `${days} days remaining`;
+
+                    container.insertAdjacentHTML("beforeend", `
+                        <div class="deadline-item">
+                            <div class="deadline-date">
+                                <strong>${escapeHTML(day)}</strong>
+                                <span>${escapeHTML(month)}</span>
+                            </div>
+
+                            <div class="deadline-details">
+                                <strong>${escapeHTML(application.title)}</strong>
+                                <span>
+                                    ${escapeHTML(message)} ·
+                                    ${escapeHTML(STATUS_LABELS[application.status])}
+                                </span>
+                            </div>
+                        </div>
+                    `);
+                });
+            }
+
+            function renderAll() {
+                renderSummary();
+                renderDeadlines();
+                renderApplications();
+            }
+
+            function openEditModal(id) {
+                const application = applications.find(item => item.id === id);
+
+                if (!application) {
+                    showToast("Application record not found.");
+                    return;
+                }
+
+                $("#editingApplicationId").value = application.id;
+                $("#modalScholarshipName").textContent = application.title;
+                $("#newStatus").value = application.status;
+                $("#applicationNotes").value = application.notes || "";
+
+                statusModal.show();
+            }
+
+            $("#statusForm").addEventListener("submit", event => {
+                event.preventDefault();
+
+                const id = $("#editingApplicationId").value;
+                const status = $("#newStatus").value;
+                const notes = $("#applicationNotes").value.trim();
+
+                if (!VALID_STATUSES.includes(status)) {
+                    showToast("Select a valid application status.");
+                    return;
+                }
+
+                const application = applications.find(item => item.id === id);
+
+                if (!application) {
+                    showToast("Application record not found.");
+                    return;
+                }
+
+                application.status = status;
+                application.notes = notes;
+                application.updatedAt = new Date().toISOString();
+
+                persistApplications();
+                renderAll();
+
+                statusModal.hide();
+                showToast("Application tracking status updated.");
+            });
+
+            $("#applicationList").addEventListener("click", event => {
+                const editButton = event.target.closest(".edit-status-button");
+                const removeButton = event.target.closest(".remove-application-button");
+
+                if (editButton) {
+                    openEditModal(editButton.dataset.id);
+                    return;
+                }
+
+                if (removeButton) {
+                    const id = removeButton.dataset.id;
+
+                    const application = applications.find(item => item.id === id);
+
+                    if (!application) return;
+
+                    const confirmed = window.confirm(
+                        `Remove "${application.title}" from your local application tracker?`
+                    );
+
+                    if (!confirmed) return;
+
+                    applications = applications.filter(item => item.id !== id);
+
+                    persistApplications();
+                    renderAll();
+
+                    showToast("Application removed from your local tracker.");
+                }
+            });
+
+            $("#searchInput").addEventListener("input", renderApplications);
+            $("#statusFilter").addEventListener("change", renderApplications);
+            $("#sortFilter").addEventListener("change", renderApplications);
+
+            $("#clearFiltersButton").addEventListener("click", () => {
+                $("#searchInput").value = "";
+                $("#statusFilter").value = "all";
+                $("#sortFilter").value = "deadline";
+
+                renderApplications();
+            });
+
+            $("#exportButton").addEventListener("click", () => {
+                if (!applications.length) {
+                    showToast("There are no application records to export.");
+                    return;
+                }
+
+                const columns = [
+                    "Application ID",
+                    "Scholarship",
+                    "Provider",
+                    "Amount INR",
+                    "Deadline",
+                    "Status",
+                    "Notes",
+                    "Last Updated"
+                ];
+
+                function csvCell(value) {
+                    const safe = String(value ?? "").replace(/"/g, '""');
+                    return `"${safe}"`;
+                }
+
+                const rows = applications.map(item => [
+                    item.id,
+                    item.title,
+                    item.provider,
+                    item.amount,
+                    item.deadline,
+                    STATUS_LABELS[item.status] || item.status,
+                    item.notes,
+                    item.updatedAt
+                ]);
+
+                const csv = [
+                    columns,
+                    ...rows
+                ].map(row => row.map(csvCell).join(",")).join("\r\n");
+
+                const blob = new Blob(
+                    ["\uFEFF", csv],
+                    { type: "text/csv;charset=utf-8;" }
+                );
+
+                const url = URL.createObjectURL(blob);
+                const anchor = document.createElement("a");
+
+                anchor.href = url;
+                anchor.download = "scholartrack-applications-demo.csv";
+                document.body.appendChild(anchor);
+                anchor.click();
+                anchor.remove();
+
+                URL.revokeObjectURL(url);
+
+                showToast("Demo application data exported as CSV.");
+            });
+
+            $("#logoutButton").addEventListener("click", async () => {
+                /*
+                 * Connect this to Flask session logout when the backend is ready.
+                 */
+                try {
+                    await fetch("http://127.0.0.1:5000/api/auth/logout", {
+                        method: "POST",
+                        credentials: "include"
+                    });
+                } catch {
+                    // Backend may not be running during frontend development.
+                }
+
+                window.location.href = "login.html";
+            });
+
+            /*
+             * A future "Add application" action can create a record from a
+             * scholarship detail page and persist it through the Flask API.
+             * This demo starts with sample application records.
+             */
+            document.addEventListener("DOMContentLoaded", () => {
+                statusModal = new bootstrap.Modal($("#statusModal"));
+                loadApplications();
+                renderAll();
+            });
+
+            // Initialize immediately because this script is at the end of body.
+            if (document.readyState !== "loading") {
+                statusModal = new bootstrap.Modal($("#statusModal"));
+                loadApplications();
+                renderAll();
+            }
+        })();
+    </script>
+</body>
+</html>
