@@ -971,159 +971,248 @@
 
             const scholarships = [
                 {
-                    id: "demo-sch-001",
-                    title: "National Merit Scholarship — Demo Record",
-                    provider: "Sample Government Scholarship Provider",
-                    amount: 25000,
-                    deadline: "2026-12-15",
-                    education: ["school", "undergraduate"],
-                    category: "merit-based",
-                    minimumMarks: 75,
-                    maximumIncome: null,
-                    regions: ["tamil-nadu", "other-india"],
-                    criteria: [
-                        "Education level: school or undergraduate",
-                        "Illustrative academic score: 75% or above",
-                        "Eligible region must be confirmed with the provider"
-                    ]
+                                "id": "1",
+                                "title": "Central Sector Scheme of Scholarships (PM-USP)",
+                                "provider": "Ministry of Education, Govt. of India",
+                                "amount": 20000,
+                                "deadline": "2026-11-30",
+                                "education": [
+                                                "undergraduate",
+                                                "postgraduate"
+                                ],
+                                "category": "merit-based",
+                                "minimumMarks": 80,
+                                "maximumIncome": 450000,
+                                "regions": [
+                                                "tamil-nadu",
+                                                "other-india"
+                                ],
+                                "officialUrl": "https://scholarships.gov.in/",
+                                "criteria": [
+                                                "Education level: undergraduate or postgraduate",
+                                                "Academic requirement: Top 20th percentile in Class 12 board",
+                                                "Family income: Rs. 4,50,000 or below per annum"
+                                ]
                 },
                 {
-                    id: "demo-sch-002",
-                    title: "Future Leaders Education Grant — Demo Record",
-                    provider: "Sample Education Foundation",
-                    amount: 40000,
-                    deadline: "2026-11-30",
-                    education: ["undergraduate", "postgraduate"],
-                    category: "merit-based",
-                    minimumMarks: 60,
-                    maximumIncome: null,
-                    regions: ["tamil-nadu", "other-india"],
-                    criteria: [
-                        "Education level: undergraduate or postgraduate",
-                        "Illustrative academic score: 60% or above",
-                        "Confirm institution and residency requirements"
-                    ]
+                                "id": "2",
+                                "title": "Reliance Foundation Undergraduate Scholarships",
+                                "provider": "Reliance Foundation",
+                                "amount": 200000,
+                                "deadline": "2026-10-31",
+                                "education": [
+                                                "undergraduate"
+                                ],
+                                "category": "merit-based",
+                                "minimumMarks": 60,
+                                "maximumIncome": 1500000,
+                                "regions": [
+                                                "tamil-nadu",
+                                                "other-india"
+                                ],
+                                "officialUrl": "https://www.scholarships.reliancefoundation.org/UG_Scholarship.aspx",
+                                "criteria": [
+                                                "Education level: 1st year undergraduate degree",
+                                                "Academic score: 60% or above in Class 12",
+                                                "Family income: up to Rs. 15,00,000 per annum"
+                                ]
                 },
                 {
-                    id: "demo-sch-003",
-                    title: "STEM Excellence Fellowship — Demo Record",
-                    provider: "Sample STEM Fellowship Council",
-                    amount: 60000,
-                    deadline: "2026-12-20",
-                    education: ["undergraduate", "postgraduate", "research"],
-                    category: "research",
-                    minimumMarks: 70,
-                    maximumIncome: null,
-                    regions: ["tamil-nadu", "other-india"],
-                    criteria: [
-                        "Education level: undergraduate, postgraduate or research",
-                        "Illustrative academic score: 70% or above",
-                        "STEM programme requirements need verification"
-                    ]
+                                "id": "3",
+                                "title": "Tata Trusts Medical and Healthcare Education Grants",
+                                "provider": "Tata Trusts",
+                                "amount": 100000,
+                                "deadline": "2026-11-15",
+                                "education": [
+                                                "undergraduate",
+                                                "postgraduate"
+                                ],
+                                "category": "special-category",
+                                "minimumMarks": 65,
+                                "maximumIncome": 600000,
+                                "regions": [
+                                                "tamil-nadu",
+                                                "other-india"
+                                ],
+                                "officialUrl": "https://www.tatatrusts.org/our-work/individual-grants-programme/education-grants",
+                                "criteria": [
+                                                "Education level: MBBS, BDS, B.Pharm, B.Sc Nursing",
+                                                "Academic score: 65% or above",
+                                                "Family income: Rs. 6,00,000 or below"
+                                ]
                 },
                 {
-                    id: "demo-sch-004",
-                    title: "Community Impact Student Grant — Demo Record",
-                    provider: "Sample Community Foundation",
-                    amount: 30000,
-                    deadline: "2026-11-15",
-                    education: ["school", "undergraduate"],
-                    category: "need-based",
-                    minimumMarks: 50,
-                    maximumIncome: 300000,
-                    regions: ["tamil-nadu", "other-india"],
-                    criteria: [
-                        "Education level: school or undergraduate",
-                        "Illustrative academic score: 50% or above",
-                        "Illustrative annual family income: ₹3,00,000 or below"
-                    ]
+                                "id": "4",
+                                "title": "AICTE Pragati Scholarship for Girl Students",
+                                "provider": "AICTE, Govt. of India",
+                                "amount": 50000,
+                                "deadline": "2026-12-31",
+                                "education": [
+                                                "undergraduate"
+                                ],
+                                "category": "special-category",
+                                "minimumMarks": 50,
+                                "maximumIncome": 800000,
+                                "regions": [
+                                                "tamil-nadu",
+                                                "other-india"
+                                ],
+                                "officialUrl": "https://scholarships.gov.in/",
+                                "criteria": [
+                                                "Education level: Technical Degree / Diploma in AICTE approved college",
+                                                "Category: Female students",
+                                                "Family income: Rs. 8,00,000 or below"
+                                ]
                 },
                 {
-                    id: "demo-sch-005",
-                    title: "Women in Technology Award — Demo Record",
-                    provider: "Sample Technology Foundation",
-                    amount: 50000,
-                    deadline: "2027-01-10",
-                    education: ["undergraduate", "postgraduate"],
-                    category: "special-category",
-                    minimumMarks: 65,
-                    maximumIncome: null,
-                    regions: ["tamil-nadu", "other-india"],
-                    criteria: [
-                        "Education level: undergraduate or postgraduate",
-                        "Illustrative academic score: 65% or above",
-                        "Actual special-category requirements must be verified"
-                    ]
+                                "id": "5",
+                                "title": "INSPIRE Scholarship for Higher Education (SHE)",
+                                "provider": "Department of Science and Technology, Govt. of India",
+                                "amount": 80000,
+                                "deadline": "2026-11-20",
+                                "education": [
+                                                "undergraduate",
+                                                "postgraduate",
+                                                "research"
+                                ],
+                                "category": "research",
+                                "minimumMarks": 85,
+                                "maximumIncome": null,
+                                "regions": [
+                                                "tamil-nadu",
+                                                "other-india"
+                                ],
+                                "officialUrl": "https://online-inspire.gov.in/",
+                                "criteria": [
+                                                "Education level: B.Sc, B.S., Int. M.Sc in Natural & Basic Sciences",
+                                                "Academic score: Top 1% in Class 12 board or top 10k in JEE/NEET",
+                                                "No income ceiling"
+                                ]
                 },
                 {
-                    id: "demo-sch-006",
-                    title: "Rural Student Support Grant — Demo Record",
-                    provider: "Sample Rural Education Trust",
-                    amount: 20000,
-                    deadline: "2026-12-05",
-                    education: ["school", "undergraduate"],
-                    category: "need-based",
-                    minimumMarks: 50,
-                    maximumIncome: 250000,
-                    regions: ["tamil-nadu", "other-india"],
-                    criteria: [
-                        "Education level: school or undergraduate",
-                        "Illustrative academic score: 50% or above",
-                        "Illustrative annual family income: ₹2,50,000 or below"
-                    ]
+                                "id": "6",
+                                "title": "HDFC Bank Parivartan's Crisis Support Scholarship",
+                                "provider": "HDFC Bank",
+                                "amount": 75000,
+                                "deadline": "2026-10-31",
+                                "education": [
+                                                "school",
+                                                "undergraduate",
+                                                "postgraduate"
+                                ],
+                                "category": "need-based",
+                                "minimumMarks": 55,
+                                "maximumIncome": 250000,
+                                "regions": [
+                                                "tamil-nadu",
+                                                "other-india"
+                                ],
+                                "officialUrl": "https://www.buddy4study.com/page/hdfc-bank-parivartans-ecss-programme",
+                                "criteria": [
+                                                "Education level: School, Diploma, Undergraduate or Postgraduate",
+                                                "Academic score: 55% or above",
+                                                "Family income: Rs. 2,50,000 or below with hardship/crisis"
+                                ]
                 },
                 {
-                    id: "demo-sch-007",
-                    title: "Emerging Innovators Fellowship — Demo Record",
-                    provider: "Sample Innovation Fellowship",
-                    amount: 75000,
-                    deadline: "2027-02-01",
-                    education: ["undergraduate", "postgraduate", "research"],
-                    category: "research",
-                    minimumMarks: 70,
-                    maximumIncome: null,
-                    regions: ["tamil-nadu", "other-india"],
-                    criteria: [
-                        "Education level: undergraduate, postgraduate or research",
-                        "Illustrative academic score: 70% or above",
-                        "Project or research criteria need verification"
-                    ]
+                                "id": "7",
+                                "title": "ONGC Foundation Scholarship for Meritorious Students",
+                                "provider": "ONGC Foundation",
+                                "amount": 48000,
+                                "deadline": "2026-12-15",
+                                "education": [
+                                                "undergraduate",
+                                                "postgraduate"
+                                ],
+                                "category": "merit-based",
+                                "minimumMarks": 60,
+                                "maximumIncome": 200000,
+                                "regions": [
+                                                "tamil-nadu",
+                                                "other-india"
+                                ],
+                                "officialUrl": "https://ongcscholar.org/",
+                                "criteria": [
+                                                "Education level: 1st year B.Tech, MBBS, MBA, Geology",
+                                                "Academic score: 60% or above",
+                                                "Family income: Rs. 2,00,000 or below"
+                                ]
                 },
                 {
-                    id: "demo-sch-008",
-                    title: "First-Generation Learner Award — Demo Record",
-                    provider: "Sample Learner Support Foundation",
-                    amount: 35000,
-                    deadline: "2026-12-28",
-                    education: ["undergraduate"],
-                    category: "special-category",
-                    minimumMarks: 60,
-                    maximumIncome: 350000,
-                    regions: ["tamil-nadu", "other-india"],
-                    criteria: [
-                        "Education level: undergraduate",
-                        "Illustrative academic score: 60% or above",
-                        "Illustrative income and category rules need verification"
-                    ]
+                                "id": "8",
+                                "title": "Sitaram Jindal Foundation Educational Scholarship",
+                                "provider": "Sitaram Jindal Foundation",
+                                "amount": 38400,
+                                "deadline": "2026-12-31",
+                                "education": [
+                                                "school",
+                                                "undergraduate"
+                                ],
+                                "category": "need-based",
+                                "minimumMarks": 60,
+                                "maximumIncome": 400000,
+                                "regions": [
+                                                "tamil-nadu",
+                                                "other-india"
+                                ],
+                                "officialUrl": "https://www.sitaramjindalfoundation.org/scholarships.php",
+                                "criteria": [
+                                                "Education level: Diploma, Polytechnic, Undergraduate",
+                                                "Academic score: 60% (Girls), 65% (Boys)",
+                                                "Family income: Rs. 4,00,000 or below"
+                                ]
                 },
                 {
-                    id: "demo-sch-009",
-                    title: "Academic Progress Scholarship — Demo Record",
-                    provider: "Sample Academic Support Council",
-                    amount: 15000,
-                    deadline: "",
-                    education: ["undergraduate"],
-                    category: "merit-based",
-                    minimumMarks: 55,
-                    maximumIncome: null,
-                    regions: ["tamil-nadu", "other-india"],
-                    criteria: [
-                        "Education level: undergraduate",
-                        "Illustrative academic score: 55% or above",
-                        "Application deadline is unknown in the demo record"
-                    ]
+                                "id": "9",
+                                "title": "Post Matric Scholarships for Minorities",
+                                "provider": "Ministry of Minority Affairs, Govt. of India",
+                                "amount": 30000,
+                                "deadline": "2026-12-20",
+                                "education": [
+                                                "undergraduate",
+                                                "postgraduate",
+                                                "research"
+                                ],
+                                "category": "special-category",
+                                "minimumMarks": 50,
+                                "maximumIncome": 200000,
+                                "regions": [
+                                                "tamil-nadu",
+                                                "other-india"
+                                ],
+                                "officialUrl": "https://scholarships.gov.in/",
+                                "criteria": [
+                                                "Education level: Higher secondary through PhD",
+                                                "Community: Notified minority communities",
+                                                "Family income: Rs. 2,00,000 or below"
+                                ]
+                },
+                {
+                                "id": "10",
+                                "title": "Chevening UK Government Scholarships",
+                                "provider": "Foreign & Commonwealth Office, UK",
+                                "amount": 3500000,
+                                "deadline": "2026-11-05",
+                                "education": [
+                                                "postgraduate",
+                                                "research"
+                                ],
+                                "category": "merit-based",
+                                "minimumMarks": 60,
+                                "maximumIncome": null,
+                                "regions": [
+                                                "tamil-nadu",
+                                                "other-india",
+                                                "other"
+                                ],
+                                "officialUrl": "https://www.chevening.org/scholarship/india/",
+                                "criteria": [
+                                                "Education level: 1-Year UK Master's degree",
+                                                "Requirement: 2 years work experience",
+                                                "No income ceiling"
+                                ]
                 }
-            ];
+];
 
             let toastTimer = null;
             let latestResults = [];
@@ -1375,14 +1464,22 @@
                             ${renderReason(item.missing, "warning")}
                         </div>
 
-                        <div class="match-actions">
-                            <a class="btn btn-green"
+                        <div class="match-actions d-flex align-items-center gap-2 flex-wrap">
+                            <a class="btn btn-green d-inline-flex align-items-center"
+                               href="${escapeHTML(item.officialUrl || 'https://scholarships.gov.in/')}"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                <i class="bi bi-box-arrow-up-right me-1"></i>
+                                Apply Online
+                            </a>
+
+                            <a class="btn btn-outline-custom"
                                href="scholarship-details.html?id=${encodeURIComponent(item.id)}">
-                                <i class="bi bi-arrow-up-right me-1"></i>
+                                <i class="bi bi-info-circle me-1"></i>
                                 View details
                             </a>
 
-                            <button class="btn btn-outline-custom save-match-button"
+                            <button class="btn btn-outline-custom save-match-button ms-auto"
                                     data-id="${escapeHTML(item.id)}">
                                 <i class="bi ${saved ? "bi-bookmark-fill" : "bi-bookmark"} me-1"></i>
                                 ${saved ? "Saved" : "Save"}

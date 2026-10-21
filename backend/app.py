@@ -7,6 +7,7 @@ from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 
 from controllers.auth_controller import auth_bp
+from controllers.scholarship_controller import scholarship_bp, get_dashboard_data
 
 BASE_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = BASE_DIR.parent / "frontend"
@@ -48,6 +49,8 @@ def create_app():
 
     # Register API Blueprints
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
+    app.register_blueprint(scholarship_bp, url_prefix="/api/scholarships")
+    app.add_url_rule("/api/dashboard", "dashboard_summary", get_dashboard_data, methods=["GET"])
 
     # Serve Landing Page at root
     @app.route("/", methods=["GET"])

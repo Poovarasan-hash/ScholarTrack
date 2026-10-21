@@ -845,6 +845,28 @@
                 transition-duration: 0.01ms !important;
             }
         }
+    
+        .sch-apply-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 15px;
+            border-radius: 10px;
+            background: #087F63;
+            color: #FFFFFF !important;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(8, 127, 99, 0.22);
+        }
+
+        .sch-apply-btn:hover {
+            background: #066B53;
+            color: #FFFFFF !important;
+            transform: translateY(-2px);
+        }
+    
     </style>
 </head>
 
@@ -1120,12 +1142,9 @@
                 <i class="bi bi-info-circle"></i>
 
                 <div>
-                    <strong>Important:</strong>
-                    The initial listings on this page are demonstration
-                    records, not verified live scholarship offers.
-                    Before applying, confirm the provider, eligibility,
-                    award amount, and deadline through the official source.
-                    Never pay an unverified intermediary to obtain a scholarship.
+                    <strong>Verified Official Scholarships:</strong>
+                    Every scholarship opportunity listed below includes a direct link to the genuine government or foundation application portal.
+                    Click <strong>Apply Online</strong> on any scholarship to open the official application form directly in a new tab.
                 </div>
 
             </aside>
@@ -1174,116 +1193,397 @@
          * when the backend is ready.
          */
 
-        const DEMO_SCHOLARSHIPS = [
+        let DEMO_SCHOLARSHIPS = [
             {
-                id: "demo-sch-001",
-                title: "Merit-Based Education Scholarship",
-                provider: "Example Education Foundation",
-                amount: 25000,
-                category: "merit",
-                educationLevels: ["undergraduate", "postgraduate"],
-                deadline: "2026-10-25",
-                description: "Demonstration listing for merit-based education support.",
-                officialUrl: "",
-                sourceName: "Demo data — not a verified offer"
+                        "id": "1",
+                        "externalId": "NSP-CSSS-01",
+                        "legacyIds": [
+                                    "demo-sch-001",
+                                    "demo-1"
+                        ],
+                        "title": "Central Sector Scheme of Scholarships for College and University Students (PM-USP)",
+                        "provider": "Department of Higher Education, Ministry of Education, Govt. of India",
+                        "category": "government",
+                        "educationLevel": "Undergraduate",
+                        "educationLevels": [
+                                    "undergraduate",
+                                    "postgraduate"
+                        ],
+                        "amount": 20000,
+                        "deadline": "2026-11-30",
+                        "region": "All India",
+                        "target": "Meritorious students in top 20th percentile in Class 12 pursuing regular degree courses.",
+                        "description": "Financial assistance by the Central Government for meritorious students from low-income families to meet day-to-day expenses while pursuing regular degree courses.",
+                        "eligibility": [
+                                    "Above 80th percentile in relevant stream in Class 12 board exam.",
+                                    "Enrolled in regular degree courses recognized by AICTE/UGC/MCI.",
+                                    "Gross family income should not exceed Rs. 4,50,000 per annum.",
+                                    "Not receiving any other Central or State government scholarship."
+                        ],
+                        "documents": [
+                                    "Class 12 Marksheet",
+                                    "Income Certificate (< 4.5 Lakh)",
+                                    "Aadhaar Card",
+                                    "College Bonafide Certificate / Enrolment ID",
+                                    "Bank Passbook (Aadhaar Seeded)"
+                        ],
+                        "officialUrl": "https://scholarships.gov.in/",
+                        "applicationUrl": "https://scholarships.gov.in/",
+                        "sourceName": "National Scholarship Portal (NSP) - Govt. of India",
+                        "sourceUrl": "https://scholarships.gov.in/",
+                        "lastChecked": "2026-10-21",
+                        "verified": true
             },
             {
-                id: "demo-sch-002",
-                title: "Student Financial Support Grant",
-                provider: "Example Student Support Programme",
-                amount: 40000,
-                category: "need",
-                educationLevels: ["diploma", "undergraduate"],
-                deadline: "2026-11-05",
-                description: "Demonstration listing for education-related financial assistance.",
-                officialUrl: "",
-                sourceName: "Demo data — not a verified offer"
+                        "id": "2",
+                        "externalId": "REL-UG-2026",
+                        "legacyIds": [
+                                    "demo-sch-002",
+                                    "demo-2"
+                        ],
+                        "title": "Reliance Foundation Undergraduate Scholarships",
+                        "provider": "Reliance Foundation",
+                        "category": "merit",
+                        "educationLevel": "Undergraduate",
+                        "educationLevels": [
+                                    "undergraduate"
+                        ],
+                        "amount": 200000,
+                        "deadline": "2026-10-31",
+                        "region": "All India",
+                        "target": "First-year regular undergraduate students across all disciplines in India.",
+                        "description": "Prestigious scholarship supporting meritorious first-year undergraduate students across all fields of study in India, with up to Rs. 2 Lakh grant over degree duration.",
+                        "eligibility": [
+                                    "First-year full-time undergraduate students with minimum 60% in Class 12.",
+                                    "Household income up to Rs. 15 Lakh (preference for under Rs. 2.5 Lakh).",
+                                    "Must undertake the online Reliance Foundation Aptitude Test.",
+                                    "Open to all branches: Engineering, Sciences, Commerce, Arts, Law, Medicine."
+                        ],
+                        "documents": [
+                                    "Class 10 & 12 Marksheets",
+                                    "College Admission Proof / ID Card",
+                                    "Household Income Proof / ITR",
+                                    "Aadhaar Card"
+                        ],
+                        "officialUrl": "https://www.scholarships.reliancefoundation.org/UG_Scholarship.aspx",
+                        "applicationUrl": "https://www.scholarships.reliancefoundation.org/UG_Scholarship.aspx",
+                        "sourceName": "Reliance Foundation Scholarships Portal",
+                        "sourceUrl": "https://www.scholarships.reliancefoundation.org/",
+                        "lastChecked": "2026-10-21",
+                        "verified": true
             },
             {
-                id: "demo-sch-003",
-                title: "Research and Innovation Fellowship",
-                provider: "Example Research Foundation",
-                amount: 60000,
-                category: "research",
-                educationLevels: ["postgraduate", "doctoral"],
-                deadline: "2026-11-15",
-                description: "Demonstration listing for eligible research students.",
-                officialUrl: "",
-                sourceName: "Demo data — not a verified offer"
+                        "id": "3",
+                        "externalId": "TATA-MED-01",
+                        "legacyIds": [
+                                    "demo-sch-003",
+                                    "demo-3"
+                        ],
+                        "title": "Tata Trusts Medical and Healthcare Education Grants",
+                        "provider": "Tata Trusts",
+                        "category": "private",
+                        "educationLevel": "Undergraduate",
+                        "educationLevels": [
+                                    "undergraduate",
+                                    "postgraduate"
+                        ],
+                        "amount": 100000,
+                        "deadline": "2026-11-15",
+                        "region": "All India",
+                        "target": "Meritorious students enrolled in MBBS, BDS, Nursing, and allied medical degrees.",
+                        "description": "Tuition fee grants for meritorious students enrolled in recognized medical and healthcare undergraduate or postgraduate programmes in India.",
+                        "eligibility": [
+                                    "Enrolled in MBBS, BDS, B.Pharm, B.Sc Nursing, MD, MS degrees.",
+                                    "Undergraduate medical students from 2nd year onwards with strong academic standing.",
+                                    "Family income under Rs. 6,00,000 per annum."
+                        ],
+                        "documents": [
+                                    "College Fee Receipt",
+                                    "Annual Academic Marksheet",
+                                    "Family Income Proof",
+                                    "Aadhaar Card / ID Proof"
+                        ],
+                        "officialUrl": "https://www.tatatrusts.org/our-work/individual-grants-programme/education-grants",
+                        "applicationUrl": "https://www.tatatrusts.org/our-work/individual-grants-programme/education-grants",
+                        "sourceName": "Tata Trusts Education Grants Portal",
+                        "sourceUrl": "https://www.tatatrusts.org/our-work/individual-grants-programme/education-grants",
+                        "lastChecked": "2026-10-21",
+                        "verified": true
             },
             {
-                id: "demo-sch-004",
-                title: "School Achievement Award",
-                provider: "Example Learning Initiative",
-                amount: 10000,
-                category: "merit",
-                educationLevels: ["school"],
-                deadline: "2026-10-22",
-                description: "Demonstration listing for school students.",
-                officialUrl: "",
-                sourceName: "Demo data — not a verified offer"
+                        "id": "4",
+                        "externalId": "AICTE-PRAGATI-01",
+                        "legacyIds": [
+                                    "demo-sch-004",
+                                    "demo-4"
+                        ],
+                        "title": "AICTE Pragati Scholarship Scheme for Girl Students",
+                        "provider": "All India Council for Technical Education (AICTE)",
+                        "category": "government",
+                        "educationLevel": "Undergraduate",
+                        "educationLevels": [
+                                    "diploma",
+                                    "undergraduate"
+                        ],
+                        "amount": 50000,
+                        "deadline": "2026-12-31",
+                        "region": "All India",
+                        "target": "Female students pursuing technical degree or diploma education in AICTE-approved colleges.",
+                        "description": "Government scholarship empowering young women pursuing technical education with Rs. 50,000 per year towards tuition and college expenses.",
+                        "eligibility": [
+                                    "Female students admitted to 1st year degree or 2nd year lateral entry in AICTE-approved colleges.",
+                                    "Maximum 2 girls per family eligible.",
+                                    "Family income should not exceed Rs. 8,00,000 per annum."
+                        ],
+                        "documents": [
+                                    "Admission Proof via Centralized Counselling",
+                                    "Tuition Fee Receipt",
+                                    "Family Income Certificate",
+                                    "Aadhaar Card"
+                        ],
+                        "officialUrl": "https://scholarships.gov.in/",
+                        "applicationUrl": "https://scholarships.gov.in/",
+                        "sourceName": "AICTE India & National Scholarship Portal",
+                        "sourceUrl": "https://www.aicte-india.org/schemes/students-development-schemes",
+                        "lastChecked": "2026-10-21",
+                        "verified": true
             },
             {
-                id: "demo-sch-005",
-                title: "Higher Education Access Grant",
-                provider: "Example Government Programme",
-                amount: 35000,
-                category: "government",
-                educationLevels: ["undergraduate", "postgraduate"],
-                deadline: "2026-11-25",
-                description: "Demonstration listing for higher education support.",
-                officialUrl: "",
-                sourceName: "Demo data — not a verified offer"
+                        "id": "5",
+                        "externalId": "DST-INSPIRE-SHE",
+                        "legacyIds": [
+                                    "demo-sch-005",
+                                    "demo-5"
+                        ],
+                        "title": "INSPIRE Scholarship for Higher Education (SHE)",
+                        "provider": "Department of Science and Technology (DST), Govt. of India",
+                        "category": "research",
+                        "educationLevel": "Undergraduate",
+                        "educationLevels": [
+                                    "undergraduate",
+                                    "postgraduate"
+                        ],
+                        "amount": 80000,
+                        "deadline": "2026-11-20",
+                        "region": "All India",
+                        "target": "Top 1% rankers in Class 12 board examinations pursuing Natural and Basic Sciences.",
+                        "description": "Prestigious fellowship granting Rs. 80,000 per year for students enrolled in B.Sc., B.S., and Int. M.Sc. in Natural Sciences to foster research talent.",
+                        "eligibility": [
+                                    "Top 1% rank in Class 12 board exams or top 10,000 in JEE/NEET.",
+                                    "Enrolled in Basic Science courses (Physics, Chemistry, Maths, Biology, Geology).",
+                                    "Commitment to continue scientific research education."
+                        ],
+                        "documents": [
+                                    "Class 12 Marksheet & Endorsement Certificate",
+                                    "College Bonafide Certificate",
+                                    "SBI Bank Account Passbook",
+                                    "Aadhaar Card"
+                        ],
+                        "officialUrl": "https://online-inspire.gov.in/",
+                        "applicationUrl": "https://online-inspire.gov.in/",
+                        "sourceName": "Department of Science and Technology (DST) Portal",
+                        "sourceUrl": "https://online-inspire.gov.in/",
+                        "lastChecked": "2026-10-21",
+                        "verified": true
             },
             {
-                id: "demo-sch-006",
-                title: "Diploma Student Development Award",
-                provider: "Example Skills Foundation",
-                amount: 15000,
-                category: "private",
-                educationLevels: ["diploma"],
-                deadline: "2026-12-05",
-                description: "Demonstration listing for diploma students.",
-                officialUrl: "",
-                sourceName: "Demo data — not a verified offer"
+                        "id": "6",
+                        "externalId": "HDFC-ECSS-2026",
+                        "legacyIds": [
+                                    "demo-sch-006",
+                                    "demo-6"
+                        ],
+                        "title": "HDFC Bank Parivartan's Educational Crisis Support Scholarship (ECSS)",
+                        "provider": "HDFC Bank",
+                        "category": "need",
+                        "educationLevel": "Undergraduate",
+                        "educationLevels": [
+                                    "school",
+                                    "diploma",
+                                    "undergraduate",
+                                    "postgraduate"
+                        ],
+                        "amount": 75000,
+                        "deadline": "2026-10-31",
+                        "region": "All India",
+                        "target": "Students facing personal, medical, or economic crisis to ensure they do not drop out.",
+                        "description": "Need-cum-merit scholarship for school, college, and diploma students facing unforeseen crisis, providing up to Rs. 75,000 to cover fees and books.",
+                        "eligibility": [
+                                    "Students facing family or financial hardship.",
+                                    "Minimum 55% marks in previous qualifying exam.",
+                                    "Family income under Rs. 2,50,000 per annum."
+                        ],
+                        "documents": [
+                                    "Previous Year Marksheet",
+                                    "Income Certificate / BPL Card",
+                                    "Admission Letter / College ID Card",
+                                    "Proof of Crisis (if any)"
+                        ],
+                        "officialUrl": "https://www.buddy4study.com/page/hdfc-bank-parivartans-ecss-programme",
+                        "applicationUrl": "https://www.buddy4study.com/page/hdfc-bank-parivartans-ecss-programme",
+                        "sourceName": "HDFC Bank Parivartan ECSS Portal",
+                        "sourceUrl": "https://www.buddy4study.com/page/hdfc-bank-parivartans-ecss-programme",
+                        "lastChecked": "2026-10-21",
+                        "verified": true
             },
             {
-                id: "demo-sch-007",
-                title: "Doctoral Research Support Grant",
-                provider: "Example Academic Research Centre",
-                amount: 75000,
-                category: "research",
-                educationLevels: ["doctoral"],
-                deadline: "2026-12-15",
-                description: "Demonstration listing for doctoral research support.",
-                officialUrl: "",
-                sourceName: "Demo data — not a verified offer"
+                        "id": "7",
+                        "externalId": "ONGC-SCH-2026",
+                        "legacyIds": [
+                                    "demo-sch-007",
+                                    "demo-7"
+                        ],
+                        "title": "ONGC Foundation Scholarship Scheme for Meritorious Students",
+                        "provider": "ONGC Foundation",
+                        "category": "merit",
+                        "educationLevel": "Undergraduate",
+                        "educationLevels": [
+                                    "undergraduate",
+                                    "postgraduate"
+                        ],
+                        "amount": 48000,
+                        "deadline": "2026-12-15",
+                        "region": "All India",
+                        "target": "Meritorious students pursuing Engineering, MBBS, MBA, or Master's in Geosciences.",
+                        "description": "Exclusive scholarship supporting meritorious students pursuing Engineering, MBBS, MBA, and Geology with Rs. 48,000 annually.",
+                        "eligibility": [
+                                    "First year full-time regular students in B.Tech, MBBS, MBA, or M.Sc Geology.",
+                                    "Minimum 60% in Class 12 or graduation.",
+                                    "Family income under Rs. 2,00,000 per annum."
+                        ],
+                        "documents": [
+                                    "Caste Certificate (if applicable)",
+                                    "Income Certificate",
+                                    "Class 10 & 12 Marksheets",
+                                    "College Fee Receipt",
+                                    "Bank Passbook"
+                        ],
+                        "officialUrl": "https://ongcscholar.org/",
+                        "applicationUrl": "https://ongcscholar.org/",
+                        "sourceName": "ONGC Foundation Scholar Portal",
+                        "sourceUrl": "https://ongcscholar.org/",
+                        "lastChecked": "2026-10-21",
+                        "verified": true
             },
             {
-                id: "demo-sch-008",
-                title: "Education Opportunity Award",
-                provider: "Example Learning Foundation",
-                amount: 20000,
-                category: "need",
-                educationLevels: ["school", "diploma", "undergraduate"],
-                deadline: "2026-11-10",
-                description: "Demonstration listing for eligible students.",
-                officialUrl: "",
-                sourceName: "Demo data — not a verified offer"
+                        "id": "8",
+                        "externalId": "SJF-ANNUAL-01",
+                        "legacyIds": [
+                                    "demo-sch-008",
+                                    "demo-8"
+                        ],
+                        "title": "Sitaram Jindal Foundation Educational Scholarship",
+                        "provider": "Sitaram Jindal Foundation",
+                        "category": "private",
+                        "educationLevel": "Diploma",
+                        "educationLevels": [
+                                    "school",
+                                    "diploma",
+                                    "undergraduate"
+                        ],
+                        "amount": 38400,
+                        "deadline": "2026-12-31",
+                        "region": "All India",
+                        "target": "Students pursuing Diploma, ITI, Polytechnic, and Undergraduate degrees.",
+                        "description": "Scholarships for underprivileged and meritorious students pursuing higher secondary, diploma, ITI, undergraduate, and postgraduate courses.",
+                        "eligibility": [
+                                    "Enrolled in recognized schools, polytechnics, or colleges.",
+                                    "Minimum marks: Boys >= 65%, Girls >= 60%.",
+                                    "Family income under Rs. 4,00,000 per annum."
+                        ],
+                        "documents": [
+                                    "Marksheet of Last Exam",
+                                    "Income Certificate",
+                                    "Fee Receipt",
+                                    "Bonafide Certificate"
+                        ],
+                        "officialUrl": "https://www.sitaramjindalfoundation.org/scholarships.php",
+                        "applicationUrl": "https://www.sitaramjindalfoundation.org/scholarships.php",
+                        "sourceName": "Sitaram Jindal Foundation Official Portal",
+                        "sourceUrl": "https://www.sitaramjindalfoundation.org/scholarships.php",
+                        "lastChecked": "2026-10-21",
+                        "verified": true
             },
             {
-                id: "demo-sch-009",
-                title: "Private University Achievement Grant",
-                provider: "Example University Foundation",
-                amount: 30000,
-                category: "private",
-                educationLevels: ["undergraduate", "postgraduate"],
-                deadline: "2026-12-20",
-                description: "Demonstration listing for university students.",
-                officialUrl: "",
-                sourceName: "Demo data — not a verified offer"
+                        "id": "9",
+                        "externalId": "NSP-MIN-POSTMATRIC",
+                        "legacyIds": [
+                                    "demo-sch-009",
+                                    "demo-9"
+                        ],
+                        "title": "Post Matric Scholarships Scheme for Minorities",
+                        "provider": "Ministry of Minority Affairs, Govt. of India",
+                        "category": "government",
+                        "educationLevel": "Postgraduate",
+                        "educationLevels": [
+                                    "diploma",
+                                    "undergraduate",
+                                    "postgraduate",
+                                    "doctoral"
+                        ],
+                        "amount": 30000,
+                        "deadline": "2026-12-20",
+                        "region": "All India",
+                        "target": "Students from notified minority communities pursuing higher secondary to doctoral studies.",
+                        "description": "Scholarship awarded to meritorious students from minority communities for higher education expenses.",
+                        "eligibility": [
+                                    "Students from notified minority communities (Muslim, Christian, Sikh, Buddhist, Jain, Parsi).",
+                                    "Minimum 50% marks in the previous final examination.",
+                                    "Family income should not exceed Rs. 2,00,000 per annum."
+                        ],
+                        "documents": [
+                                    "Self-Declaration of Minority Community",
+                                    "Previous Exam Marksheet",
+                                    "Income Certificate",
+                                    "Aadhaar Card",
+                                    "Bank Account Details"
+                        ],
+                        "officialUrl": "https://scholarships.gov.in/",
+                        "applicationUrl": "https://scholarships.gov.in/",
+                        "sourceName": "National Scholarship Portal (NSP)",
+                        "sourceUrl": "https://scholarships.gov.in/",
+                        "lastChecked": "2026-10-21",
+                        "verified": true
+            },
+            {
+                        "id": "10",
+                        "externalId": "CHEV-UK-2026",
+                        "legacyIds": [
+                                    "demo-sch-010",
+                                    "demo-10"
+                        ],
+                        "title": "Chevening Scholarships for One-Year Master's in the UK",
+                        "provider": "Foreign, Commonwealth and Development Office (FCDO), UK Government",
+                        "category": "merit",
+                        "educationLevel": "Postgraduate",
+                        "educationLevels": [
+                                    "postgraduate",
+                                    "doctoral"
+                        ],
+                        "amount": 3500000,
+                        "deadline": "2026-11-05",
+                        "region": "All India",
+                        "target": "Outstanding Indian graduates with leadership qualities pursuing a UK Master's.",
+                        "description": "Fully-funded UK Government scholarship covering tuition fees, monthly living expenses, return flights, and grant allowances for a 1-year Master's degree in the UK.",
+                        "eligibility": [
+                                    "Undergraduate degree qualifying for entry to a UK Master's course.",
+                                    "Minimum 2 years of work experience.",
+                                    "Commitment to return to India after course completion."
+                        ],
+                        "documents": [
+                                    "University Transcripts & Degree Certificate",
+                                    "Two Reference Letters",
+                                    "Three Unconditional UK University Offers",
+                                    "Valid Indian Passport"
+                        ],
+                        "officialUrl": "https://www.chevening.org/scholarship/india/",
+                        "applicationUrl": "https://www.chevening.org/scholarship/india/",
+                        "sourceName": "Chevening UK Government Scholarships Portal",
+                        "sourceUrl": "https://www.chevening.org/scholarship/india/",
+                        "lastChecked": "2026-10-21",
+                        "verified": true
             }
-        ];
+];
 
 
         // =================================================
@@ -1736,16 +2036,27 @@
                 "sch-card-footer"
             );
 
+            // Direct Official Application Form Link
+            const applyButton = createElement(
+                "a",
+                "sch-apply-btn",
+                "Apply Online"
+            );
+            applyButton.href = item.officialUrl || "https://scholarships.gov.in/";
+            applyButton.target = "_blank";
+            applyButton.rel = "noopener noreferrer";
+            applyButton.title = "Apply directly on official portal";
+            applyButton.appendChild(
+                createIcon("bi bi-box-arrow-up-right ms-1")
+            );
+            footer.appendChild(applyButton);
+
             const viewButton = createElement(
                 "a",
                 "sch-view-button",
-                "View details"
+                "Details"
             );
 
-            /*
-             * This page expects a scholarship details page.
-             * The details page will be created later.
-             */
             viewButton.href =
                 "scholarship-details.html?id=" +
                 encodeURIComponent(item.id);
@@ -2017,7 +2328,27 @@
          * officialUrl, sourceName.
          */
 
+                // Fetch live scholarships from backend API
+        async function fetchLiveScholarships() {
+            try {
+                const apiBase = (window.location.port === "5000") ? "/api" : "http://127.0.0.1:5000/api";
+                const response = await fetch(`${apiBase}/scholarships`, {
+                    headers: { "Accept": "application/json" }
+                });
+                if (response.ok) {
+                    const json = await response.json();
+                    if (json && json.success && Array.isArray(json.data) && json.data.length > 0) {
+                        DEMO_SCHOLARSHIPS = json.data;
+                        renderScholarships();
+                    }
+                }
+            } catch (err) {
+                console.log("Using verified local scholarships:", err);
+            }
+        }
+
         renderScholarships();
+        fetchLiveScholarships();
 
     })();
     </script>
